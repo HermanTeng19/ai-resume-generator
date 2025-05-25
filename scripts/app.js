@@ -1,0 +1,593 @@
+/**
+ * AI简历生成器 - 主应用文件
+ * 负责应用初始化、事件监听和核心功能协调
+ */
+
+class ResumeApp {
+    constructor() {
+        this.currentTemplate = 'classic';
+        this.currentTheme = 'blue';
+        this.currentZoom = 100;
+        this.isDarkMode = false;
+        this.isLayoutVertical = false;
+        this.undoStack = [];
+        this.redoStack = [];
+        this.maxUndoSteps = 50;
+        
+        this.init();
+    }
+
+    /**
+     * 初始化应用
+     */
+    init() {
+        this.initializeElements();
+        this.bindEvents();
+        this.loadFromLocalStorage();
+        this.updatePreview();
+        this.showWelcomeToast();
+    }
+
+    /**
+     * 初始化DOM元素引用
+     */
+    initializeElements() {
+        // 编辑器元素
+        this.markdownInput = document.getElementById('markdownInput');
+        this.previewContent = document.getElementById('previewContent');
+        
+        // 标签页元素
+        this.tabButtons = document.querySelectorAll('.tab-btn');
+        this.tabContents = document.querySelectorAll('.tab-content');
+        
+        // 按钮元素
+        this.exportBtn = document.getElementById('exportBtn');
+        this.importBtn = document.getElementById('importBtn');
+        this.saveBtn = document.getElementById('saveBtn');
+        this.clearBtn = document.getElementById('clearBtn');
+        this.copyHtmlBtn = document.getElementById('copyHtmlBtn');
+        this.printBtn = document.getElementById('printBtn');
+        this.undoBtn = document.getElementById('undoBtn');
+        this.redoBtn = document.getElementById('redoBtn');
+        this.toggleThemeBtn = document.getElementById('toggleTheme');
+        this.toggleLayoutBtn = document.getElementById('toggleLayout');
+        this.loadTemplateBtn = document.getElementById('loadTemplateBtn');
+        
+        // 预览控制元素
+        this.zoomInBtn = document.getElementById('zoomInBtn');
+        this.zoomOutBtn = document.getElementById('zoomOutBtn');
+        this.fullscreenBtn = document.getElementById('fullscreenBtn');
+        this.zoomLevel = document.querySelector('.zoom-level');
+        
+        // 设置元素
+        this.templateCards = document.querySelectorAll('.template-card');
+        this.colorOptions = document.querySelectorAll('.color-option');
+        this.fontSizeRange = document.getElementById('fontSizeRange');
+        this.lineHeightRange = document.getElementById('lineHeightRange');
+        this.marginSelect = document.getElementById('marginSelect');
+        
+        // 模态框元素
+        this.importModal = document.getElementById('importModal');
+        this.fileInput = document.getElementById('fileInput');
+        this.fileDropZone = document.getElementById('fileDropZone');
+        this.toastContainer = document.getElementById('toastContainer');
+    }
+
+    /**
+     * 绑定事件监听器
+     */
+    bindEvents() {
+        // 编辑器事件
+        this.markdownInput.addEventListener('input', this.debounce(() => {
+            this.saveToUndoStack();
+            this.updatePreview();
+            this.saveToLocalStorage();
+        }, 300));
+
+        // 标签页切换
+        this.tabButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.switchTab(e.target.dataset.tab);
+            });
+        });
+
+        // 主要功能按钮
+        this.exportBtn.addEventListener('click', () => this.exportHTML());
+        this.importBtn.addEventListener('click', () => this.showImportModal());
+        this.saveBtn.addEventListener('click', () => this.saveToLocalStorage(true));
+        this.clearBtn.addEventListener('click', () => this.clearContent());
+        this.copyHtmlBtn.addEventListener('click', () => this.copyHTML());
+        this.printBtn.addEventListener('click', () => this.printResume());
+        this.undoBtn.addEventListener('click', () => this.undo());
+        this.redoBtn.addEventListener('click', () => this.redo());
+        this.toggleThemeBtn.addEventListener('click', () => this.toggleTheme());
+        this.toggleLayoutBtn.addEventListener('click', () => this.toggleLayout());
+        this.loadTemplateBtn.addEventListener('click', () => this.loadTemplate());
+
+        // 预览控制
+        this.zoomInBtn.addEventListener('click', () => this.zoomIn());
+        this.zoomOutBtn.addEventListener('click', () => this.zoomOut());
+        this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+
+        // 模板选择
+        this.templateCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                this.selectTemplate(e.currentTarget.dataset.template);
+            });
+        });
+
+        // 颜色主题选择
+        this.colorOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                this.selectTheme(e.currentTarget.dataset.color);
+            });
+        });
+
+        // 字体设置
+        this.fontSizeRange.addEventListener('input', (e) => {
+            this.updateFontSize(e.target.value);
+        });
+
+        this.lineHeightRange.addEventListener('input', (e) => {
+            this.updateLineHeight(e.target.value);
+        });
+
+        this.marginSelect.addEventListener('change', (e) => {
+            this.updateMargin(e.target.value);
+        });
+
+        // 文件导入
+        this.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+        
+        // 拖拽上传
+        this.setupDragAndDrop();
+
+        // 模态框关闭
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-close') || e.target.classList.contains('modal')) {
+                this.closeModal();
+            }
+        });
+
+        // 键盘快捷键
+        document.addEventListener('keydown', (e) => this.handleKeyboardShortcuts(e));
+
+        // 窗口大小变化
+        window.addEventListener('resize', this.debounce(() => {
+            this.handleResize();
+        }, 250));
+
+        // 页面卸载前保存
+        window.addEventListener('beforeunload', () => {
+            this.saveToLocalStorage();
+        });
+    }
+
+    /**
+     * 切换标签页
+     */
+    switchTab(tabName) {
+        // 更新标签按钮状态
+        this.tabButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tabName);
+        });
+
+        // 更新标签内容显示
+        this.tabContents.forEach(content => {
+            content.classList.toggle('active', content.id === `${tabName}Tab`);
+        });
+    }
+
+    /**
+     * 更新预览内容
+     */
+    updatePreview() {
+        const markdownText = this.markdownInput.value;
+        const htmlContent = marked.parse(markdownText);
+        
+        // 应用模板和主题
+        const templateClass = `resume-template-${this.currentTemplate}`;
+        const themeClass = `theme-${this.currentTheme}`;
+        
+        this.previewContent.innerHTML = `
+            <div class="resume-content ${templateClass} ${themeClass}">
+                ${this.processHTML(htmlContent)}
+            </div>
+        `;
+
+        // 应用缩放
+        this.applyZoom();
+        
+        // 更新撤销重做按钮状态
+        this.updateUndoRedoButtons();
+    }
+
+    /**
+     * 处理HTML内容，添加特殊样式
+     */
+    processHTML(html) {
+        // 处理联系信息
+        html = html.replace(
+            /- 📧 Email: (.+)/g,
+            '<div class="contact-item"><i class="fas fa-envelope"></i><span>$1</span></div>'
+        );
+        html = html.replace(
+            /- 📱 电话: (.+)/g,
+            '<div class="contact-item"><i class="fas fa-phone"></i><span>$1</span></div>'
+        );
+        html = html.replace(
+            /- 🏠 地址: (.+)/g,
+            '<div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>$1</span></div>'
+        );
+        html = html.replace(
+            /- 💼 LinkedIn: (.+)/g,
+            '<div class="contact-item"><i class="fab fa-linkedin"></i><span>$1</span></div>'
+        );
+        html = html.replace(
+            /- 🐙 GitHub: (.+)/g,
+            '<div class="contact-item"><i class="fab fa-github"></i><span>$1</span></div>'
+        );
+
+        // 包装联系信息
+        html = html.replace(
+            /(<div class="contact-item">.*?<\/div>\s*)+/gs,
+            '<div class="contact-info">$&</div>'
+        );
+
+        // 处理工作经验项目
+        html = html.replace(
+            /<h3>(.+?) \| (.+?)<\/h3>\s*<p><em>(.+?)<\/em><\/p>/g,
+            '<div class="experience-item"><h3 class="job-title">$1</h3><h4 class="company">$2</h4><p class="date">$3</p>'
+        );
+
+        return html;
+    }
+
+    /**
+     * 选择模板
+     */
+    selectTemplate(template) {
+        this.currentTemplate = template;
+        
+        // 更新模板卡片状态
+        this.templateCards.forEach(card => {
+            card.classList.toggle('active', card.dataset.template === template);
+        });
+        
+        this.updatePreview();
+        this.saveToLocalStorage();
+        this.showToast('success', '模板已更新', `已切换到${this.getTemplateName(template)}模板`);
+    }
+
+    /**
+     * 选择主题颜色
+     */
+    selectTheme(theme) {
+        this.currentTheme = theme;
+        
+        // 更新颜色选项状态
+        this.colorOptions.forEach(option => {
+            option.classList.toggle('active', option.dataset.color === theme);
+        });
+        
+        this.updatePreview();
+        this.saveToLocalStorage();
+        this.showToast('success', '主题已更新', `已切换到${this.getThemeName(theme)}主题`);
+    }
+
+    /**
+     * 更新字体大小
+     */
+    updateFontSize(size) {
+        document.documentElement.style.setProperty('--resume-font-size', `${size}px`);
+        document.querySelector('#fontSizeRange + .range-value').textContent = `${size}px`;
+        this.updatePreview();
+    }
+
+    /**
+     * 更新行高
+     */
+    updateLineHeight(height) {
+        document.documentElement.style.setProperty('--resume-line-height', height);
+        document.querySelector('#lineHeightRange + .range-value').textContent = height;
+        this.updatePreview();
+    }
+
+    /**
+     * 更新页面边距
+     */
+    updateMargin(margin) {
+        const margins = {
+            narrow: '1rem',
+            normal: '2rem',
+            wide: '3rem'
+        };
+        
+        document.documentElement.style.setProperty('--resume-margin', margins[margin]);
+        this.updatePreview();
+    }
+
+    /**
+     * 缩放功能
+     */
+    zoomIn() {
+        if (this.currentZoom < 200) {
+            this.currentZoom += 10;
+            this.applyZoom();
+        }
+    }
+
+    zoomOut() {
+        if (this.currentZoom > 50) {
+            this.currentZoom -= 10;
+            this.applyZoom();
+        }
+    }
+
+    applyZoom() {
+        const scale = this.currentZoom / 100;
+        this.previewContent.style.transform = `scale(${scale})`;
+        this.zoomLevel.textContent = `${this.currentZoom}%`;
+    }
+
+    /**
+     * 全屏预览
+     */
+    toggleFullscreen() {
+        const previewPanel = document.querySelector('.preview-panel');
+        
+        if (previewPanel.classList.contains('fullscreen')) {
+            previewPanel.classList.remove('fullscreen');
+            this.fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+        } else {
+            previewPanel.classList.add('fullscreen');
+            this.fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+        }
+    }
+
+    /**
+     * 切换主题（明暗模式）
+     */
+    toggleTheme() {
+        this.isDarkMode = !this.isDarkMode;
+        document.documentElement.setAttribute('data-theme', this.isDarkMode ? 'dark' : 'light');
+        
+        const icon = this.toggleThemeBtn.querySelector('i');
+        icon.className = this.isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+        
+        this.saveToLocalStorage();
+        this.showToast('info', '主题已切换', this.isDarkMode ? '已切换到暗色模式' : '已切换到亮色模式');
+    }
+
+    /**
+     * 切换布局
+     */
+    toggleLayout() {
+        this.isLayoutVertical = !this.isLayoutVertical;
+        const mainContent = document.querySelector('.main-content');
+        
+        if (this.isLayoutVertical) {
+            mainContent.style.gridTemplateAreas = '"editor" "preview"';
+            mainContent.style.gridTemplateColumns = '1fr';
+            mainContent.style.gridTemplateRows = '1fr 1fr';
+        } else {
+            mainContent.style.gridTemplateAreas = '"editor preview"';
+            mainContent.style.gridTemplateColumns = '1fr 1fr';
+            mainContent.style.gridTemplateRows = '1fr';
+        }
+        
+        const icon = this.toggleLayoutBtn.querySelector('i');
+        icon.className = this.isLayoutVertical ? 'fas fa-columns' : 'fas fa-rows';
+        
+        this.saveToLocalStorage();
+    }
+
+    /**
+     * 撤销重做功能
+     */
+    saveToUndoStack() {
+        const currentContent = this.markdownInput.value;
+        
+        // 避免重复保存相同内容
+        if (this.undoStack.length === 0 || this.undoStack[this.undoStack.length - 1] !== currentContent) {
+            this.undoStack.push(currentContent);
+            
+            // 限制撤销栈大小
+            if (this.undoStack.length > this.maxUndoSteps) {
+                this.undoStack.shift();
+            }
+            
+            // 清空重做栈
+            this.redoStack = [];
+        }
+    }
+
+    undo() {
+        if (this.undoStack.length > 1) {
+            const currentContent = this.undoStack.pop();
+            this.redoStack.push(currentContent);
+            
+            const previousContent = this.undoStack[this.undoStack.length - 1];
+            this.markdownInput.value = previousContent;
+            this.updatePreview();
+            this.updateUndoRedoButtons();
+        }
+    }
+
+    redo() {
+        if (this.redoStack.length > 0) {
+            const content = this.redoStack.pop();
+            this.undoStack.push(content);
+            
+            this.markdownInput.value = content;
+            this.updatePreview();
+            this.updateUndoRedoButtons();
+        }
+    }
+
+    updateUndoRedoButtons() {
+        this.undoBtn.disabled = this.undoStack.length <= 1;
+        this.redoBtn.disabled = this.redoStack.length === 0;
+    }
+
+    /**
+     * 本地存储功能
+     */
+    saveToLocalStorage(showToast = false) {
+        const data = {
+            content: this.markdownInput.value,
+            template: this.currentTemplate,
+            theme: this.currentTheme,
+            zoom: this.currentZoom,
+            isDarkMode: this.isDarkMode,
+            isLayoutVertical: this.isLayoutVertical,
+            timestamp: Date.now()
+        };
+        
+        localStorage.setItem('resumeApp', JSON.stringify(data));
+        
+        if (showToast) {
+            this.showToast('success', '保存成功', '简历内容已保存到本地');
+        }
+    }
+
+    loadFromLocalStorage() {
+        const saved = localStorage.getItem('resumeApp');
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                
+                this.markdownInput.value = data.content || '';
+                this.currentTemplate = data.template || 'classic';
+                this.currentTheme = data.theme || 'blue';
+                this.currentZoom = data.zoom || 100;
+                this.isDarkMode = data.isDarkMode || false;
+                this.isLayoutVertical = data.isLayoutVertical || false;
+                
+                // 应用设置
+                this.selectTemplate(this.currentTemplate);
+                this.selectTheme(this.currentTheme);
+                this.applyZoom();
+                
+                if (this.isDarkMode) {
+                    this.toggleTheme();
+                }
+                
+                if (this.isLayoutVertical) {
+                    this.toggleLayout();
+                }
+                
+                // 初始化撤销栈
+                this.saveToUndoStack();
+                
+            } catch (error) {
+                console.error('加载本地存储失败:', error);
+            }
+        } else {
+            // 初始化撤销栈
+            this.saveToUndoStack();
+        }
+    }
+
+    /**
+     * 清空内容
+     */
+    clearContent() {
+        if (confirm('确定要清空所有内容吗？此操作不可撤销。')) {
+            this.saveToUndoStack();
+            this.markdownInput.value = '';
+            this.updatePreview();
+            this.saveToLocalStorage();
+            this.showToast('info', '内容已清空', '编辑器内容已清空');
+        }
+    }
+
+    /**
+     * 工具函数
+     */
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    getTemplateName(template) {
+        const names = {
+            classic: '经典',
+            modern: '现代',
+            minimal: '简约'
+        };
+        return names[template] || template;
+    }
+
+    getThemeName(theme) {
+        const names = {
+            blue: '蓝色',
+            green: '绿色',
+            purple: '紫色',
+            red: '红色',
+            gray: '灰色'
+        };
+        return names[theme] || theme;
+    }
+
+    /**
+     * 显示欢迎提示
+     */
+    showWelcomeToast() {
+        setTimeout(() => {
+            this.showToast('info', '欢迎使用AI简历生成器', '开始编辑您的Markdown简历吧！');
+        }, 1000);
+    }
+
+    /**
+     * 响应式处理
+     */
+    handleResize() {
+        // 在移动设备上自动切换到垂直布局
+        if (window.innerWidth <= 768 && !this.isLayoutVertical) {
+            this.toggleLayout();
+        }
+    }
+
+    /**
+     * 键盘快捷键
+     */
+    handleKeyboardShortcuts(e) {
+        if (e.ctrlKey || e.metaKey) {
+            switch (e.key) {
+                case 's':
+                    e.preventDefault();
+                    this.saveToLocalStorage(true);
+                    break;
+                case 'z':
+                    e.preventDefault();
+                    if (e.shiftKey) {
+                        this.redo();
+                    } else {
+                        this.undo();
+                    }
+                    break;
+                case 'p':
+                    e.preventDefault();
+                    this.printResume();
+                    break;
+                case 'e':
+                    e.preventDefault();
+                    this.exportHTML();
+                    break;
+            }
+        }
+    }
+}
+
+// 初始化应用
+document.addEventListener('DOMContentLoaded', () => {
+    window.resumeApp = new ResumeApp();
+}); 

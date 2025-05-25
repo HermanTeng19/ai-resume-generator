@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI简历生成器 - Markdown转HTML简历工具</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/resume-templates.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-file-alt"></i>
+                <span>AI简历生成器</span>
+            </div>
+            <nav class="nav-actions">
+                <button class="btn btn-icon" id="toggleTheme" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-icon" id="toggleLayout" title="切换布局">
+                    <i class="fas fa-columns"></i>
+                </button>
+                <button class="btn btn-secondary" id="importBtn">
+                    <i class="fas fa-upload"></i>
+                    导入
+                </button>
+                <button class="btn btn-primary" id="exportBtn">
+                    <i class="fas fa-download"></i>
+                    导出HTML
+                </button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Editor Panel -->
+            <section class="editor-panel">
+                <div class="editor-header">
+                    <div class="editor-tabs">
+                        <button class="tab-btn active" data-tab="markdown">
+                            <i class="fab fa-markdown"></i>
+                            Markdown编辑器
+                        </button>
+                        <button class="tab-btn" data-tab="settings">
+                            <i class="fas fa-cog"></i>
+                            样式设置
+                        </button>
+                    </div>
+                    <div class="editor-actions">
+                        <button class="btn btn-icon" id="clearBtn" title="清空内容">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="btn btn-icon" id="loadTemplateBtn" title="加载模板">
+                            <i class="fas fa-file-import"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Markdown Editor Tab -->
+                <div class="tab-content active" id="markdownTab">
+                    <textarea 
+                        class="markdown-editor" 
+                        id="markdownInput" 
+                        placeholder="在此输入您的Markdown简历内容...
+
+# 张三
+**前端开发工程师**
+
+## 联系方式
+- 📧 Email: zhangsan@example.com
+- 📱 电话: +86 138-0000-0000
+- 🏠 地址: 北京市朝阳区
+- 💼 LinkedIn: linkedin.com/in/zhangsan
+- 🐙 GitHub: github.com/zhangsan
+
+## 个人简介
+具有5年前端开发经验的工程师，专注于React生态系统和现代Web技术...
+
+## 工作经验
+
+### 高级前端开发工程师 | ABC科技公司
+*2021.06 - 至今*
+
+- 负责公司核心产品的前端架构设计和开发
+- 使用React、TypeScript构建高性能的Web应用
+- 优化页面性能，提升用户体验
+
+### 前端开发工程师 | XYZ互联网公司  
+*2019.03 - 2021.05*
+
+- 参与多个项目的前端开发工作
+- 与设计师和后端工程师协作完成产品功能
+
+## 技能专长
+- **前端技术**: React, Vue.js, TypeScript, JavaScript
+- **样式技术**: CSS3, Sass, Tailwind CSS
+- **工具链**: Webpack, Vite, Git, Docker
+- **其他**: Node.js, Express, MongoDB
+
+## 教育背景
+
+### 计算机科学与技术学士 | 清华大学
+*2015.09 - 2019.06*
+
+## 项目经验
+
+### 企业级管理系统
+- 使用React + TypeScript开发的大型管理系统
+- 实现了复杂的数据可视化和表单处理功能
+- 支持多租户架构，服务超过10万用户
+
+### 移动端电商应用
+- 基于React Native开发的跨平台移动应用
+- 集成支付、地图、推送等第三方服务
+- 在App Store和Google Play获得4.8分评价"></textarea>
+                </div>
+                
+                <!-- Settings Tab -->
+                <div class="tab-content" id="settingsTab">
+                    <div class="settings-panel">
+                        <div class="settings-section">
+                            <h3>模板选择</h3>
+                            <div class="template-grid">
+                                <div class="template-card active" data-template="classic">
+                                    <div class="template-preview"></div>
+                                    <span>经典模板</span>
+                                </div>
+                                <div class="template-card" data-template="modern">
+                                    <div class="template-preview"></div>
+                                    <span>现代模板</span>
+                                </div>
+                                <div class="template-card" data-template="minimal">
+                                    <div class="template-preview"></div>
+                                    <span>简约模板</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3>颜色主题</h3>
+                            <div class="color-picker">
+                                <div class="color-option active" data-color="blue" style="background: #3b82f6;"></div>
+                                <div class="color-option" data-color="green" style="background: #10b981;"></div>
+                                <div class="color-option" data-color="purple" style="background: #8b5cf6;"></div>
+                                <div class="color-option" data-color="red" style="background: #ef4444;"></div>
+                                <div class="color-option" data-color="gray" style="background: #6b7280;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3>字体设置</h3>
+                            <div class="form-group">
+                                <label class="form-label">字体大小</label>
+                                <input type="range" class="form-range" id="fontSizeRange" min="12" max="18" value="16">
+                                <span class="range-value">16px</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">行高</label>
+                                <input type="range" class="form-range" id="lineHeightRange" min="1.2" max="2.0" step="0.1" value="1.6">
+                                <span class="range-value">1.6</span>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3>页面设置</h3>
+                            <div class="form-group">
+                                <label class="form-label">页面边距</label>
+                                <select class="form-select" id="marginSelect">
+                                    <option value="normal">标准边距</option>
+                                    <option value="narrow">窄边距</option>
+                                    <option value="wide">宽边距</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Panel -->
+            <section class="preview-panel">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <i class="fas fa-eye"></i>
+                        实时预览
+                    </div>
+                    <div class="preview-actions">
+                        <button class="btn btn-icon" id="zoomOutBtn" title="缩小">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <span class="zoom-level">100%</span>
+                        <button class="btn btn-icon" id="zoomInBtn" title="放大">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button class="btn btn-icon" id="fullscreenBtn" title="全屏预览">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="preview-container">
+                    <div class="preview-content" id="previewContent">
+                        <!-- 预览内容将在这里动态生成 -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Toolbar -->
+        <aside class="toolbar">
+            <div class="toolbar-section">
+                <button class="btn btn-icon" id="saveBtn" title="保存到本地存储">
+                    <i class="fas fa-save"></i>
+                </button>
+                <button class="btn btn-icon" id="copyHtmlBtn" title="复制HTML代码">
+                    <i class="fas fa-code"></i>
+                </button>
+                <button class="btn btn-icon" id="printBtn" title="打印简历">
+                    <i class="fas fa-print"></i>
+                </button>
+            </div>
+            <div class="toolbar-section">
+                <button class="btn btn-icon" id="undoBtn" title="撤销">
+                    <i class="fas fa-undo"></i>
+                </button>
+                <button class="btn btn-icon" id="redoBtn" title="重做">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Modal for Import -->
+    <div class="modal" id="importModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>导入Markdown文件</h3>
+                <button class="btn btn-icon modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="file-drop-zone" id="fileDropZone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>拖拽文件到此处或点击选择文件</p>
+                    <input type="file" id="fileInput" accept=".md,.txt" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        选择文件
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/editor.js"></script>
+    <script src="scripts/preview.js"></script>
+    <script src="scripts/export.js"></script>
+    <script src="scripts/templates.js"></script>
+</body>
+</html> 

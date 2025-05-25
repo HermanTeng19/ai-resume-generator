@@ -1,0 +1,1 @@
+{"name":"ai-resume-generator","version":"1.0.0","description":"一个轻量级的Markdown简历转换工具","main":"index.html","scripts":{"start":"npx http-server . -p 8000 -o","dev":"npx live-server --port=8000 --open=/","serve":"npx serve . -p 8000"},"keywords":["resume","markdown","html","generator","cv"],"author":"AI Resume Generator","license":"MIT"}
