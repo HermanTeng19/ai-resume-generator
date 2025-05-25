@@ -354,6 +354,91 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* ===== 语言选择器 ===== */
+.language-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 60px;
+}
+
+.language-text {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 140px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+}
+
+.language-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: var(--radius-sm);
+  margin: var(--space-1);
+}
+
+.language-option:hover {
+  background: var(--bg-secondary);
+}
+
+.language-option.active {
+  background: var(--primary-50);
+  color: var(--primary-600);
+}
+
+.language-option .flag {
+  font-size: 16px;
+}
+
+.language-option span:last-child {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Dark theme adjustments for language selector */
+[data-theme="dark"] .language-dropdown {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+}
+
+[data-theme="dark"] .language-option:hover {
+  background: var(--gray-700);
+}
+
+[data-theme="dark"] .language-option.active {
+  background: var(--primary-900);
+  color: var(--primary-300);
+}
+
 /* ===== 模态框组件 ===== */
 .modal {
   position: fixed;

@@ -26,6 +26,11 @@ class ResumeApp {
         this.loadFromLocalStorage();
         this.updatePreview();
         this.showWelcomeToast();
+        
+        // 监听语言切换事件
+        window.addEventListener('languageChanged', (e) => {
+            this.handleLanguageChange(e.detail.language);
+        });
     }
 
     /**
@@ -542,8 +547,39 @@ class ResumeApp {
      */
     showWelcomeToast() {
         setTimeout(() => {
-            this.showToast('info', '欢迎使用AI简历生成器', '开始编辑您的Markdown简历吧！');
+            const message = window.i18n ? window.i18n.t('welcomeMessage') || '欢迎使用AI简历生成器' : '欢迎使用AI简历生成器';
+            const detail = window.i18n ? window.i18n.t('welcomeDetail') || '开始编辑您的Markdown简历吧！' : '开始编辑您的Markdown简历吧！';
+            this.showToast('info', message, detail);
         }, 1000);
+    }
+
+    /**
+     * 处理语言切换
+     */
+    handleLanguageChange(language) {
+        // 更新选项文本
+        this.updateSelectOptions();
+        
+        // 显示语言切换成功消息
+        if (language) {
+            const message = window.i18n.t('languageChanged') || '语言已切换';
+            this.showToast('success', message);
+        }
+    }
+
+    /**
+     * 更新选择框选项
+     */
+    updateSelectOptions() {
+        if (this.marginSelect && window.i18n) {
+            const options = this.marginSelect.querySelectorAll('option');
+            options.forEach(option => {
+                const key = option.dataset.i18n;
+                if (key) {
+                    option.textContent = window.i18n.t(key);
+                }
+            });
+        }
     }
 
     /**

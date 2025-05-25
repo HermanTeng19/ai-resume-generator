@@ -14,6 +14,7 @@
 ### 🎨 样式定制
 - **多种模板** - 经典、现代、简约三种设计风格
 - **主题颜色** - 蓝色、绿色、紫色、红色、灰色主题
+- **多语言支持** - 中英文界面切换，国际化体验
 - **字体调节** - 可调整字体大小、行高、页面边距
 - **明暗主题** - 支持明暗模式切换
 - **响应式设计** - 适配桌面和移动设备
@@ -140,11 +141,13 @@ ai-resume-generator/
 │   ├── components.css   # 组件样式
 │   └── resume-templates.css # 简历模板样式
 ├── scripts/             # JavaScript文件
+│   ├── i18n.js         # 国际化模块
 │   ├── app.js          # 主应用逻辑
 │   ├── editor.js       # 编辑器功能
 │   ├── export.js       # 导出功能
 │   └── ui-utils.js     # UI工具
-├── example-resume.md    # 示例简历
+├── example-resume.md    # 中文示例简历
+├── example-resume-en.md # 英文示例简历
 ├── QUICK_START.md      # 快速开始指南
 └── README.md           # 项目说明
 ```

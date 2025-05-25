@@ -28,22 +28,22 @@
         <header class="header">
             <div class="logo">
                 <i class="fas fa-file-alt"></i>
-                <span>AI简历生成器</span>
+                <span data-i18n="appName">AI简历生成器</span>
             </div>
             <nav class="nav-actions">
-                <button class="btn btn-icon" id="toggleTheme" title="切换主题">
+                <button class="btn btn-icon" id="toggleTheme" data-i18n-title="toggleTheme" title="切换主题">
                     <i class="fas fa-moon"></i>
                 </button>
-                <button class="btn btn-icon" id="toggleLayout" title="切换布局">
+                <button class="btn btn-icon" id="toggleLayout" data-i18n-title="toggleLayout" title="切换布局">
                     <i class="fas fa-columns"></i>
                 </button>
                 <button class="btn btn-secondary" id="importBtn">
                     <i class="fas fa-upload"></i>
-                    导入
+                    <span data-i18n="import">导入</span>
                 </button>
                 <button class="btn btn-primary" id="exportBtn">
                     <i class="fas fa-download"></i>
-                    导出HTML
+                    <span data-i18n="export">导出HTML</span>
                 </button>
             </nav>
         </header>
@@ -56,18 +56,18 @@
                     <div class="editor-tabs">
                         <button class="tab-btn active" data-tab="markdown">
                             <i class="fab fa-markdown"></i>
-                            Markdown编辑器
+                            <span data-i18n="markdownEditor">Markdown编辑器</span>
                         </button>
                         <button class="tab-btn" data-tab="settings">
                             <i class="fas fa-cog"></i>
-                            样式设置
+                            <span data-i18n="styleSettings">样式设置</span>
                         </button>
                     </div>
                     <div class="editor-actions">
-                        <button class="btn btn-icon" id="clearBtn" title="清空内容">
+                        <button class="btn btn-icon" id="clearBtn" data-i18n-title="clearContent" title="清空内容">
                             <i class="fas fa-trash"></i>
                         </button>
-                        <button class="btn btn-icon" id="loadTemplateBtn" title="加载模板">
+                        <button class="btn btn-icon" id="loadTemplateBtn" data-i18n-title="loadTemplate" title="加载模板">
                             <i class="fas fa-file-import"></i>
                         </button>
                     </div>
@@ -78,6 +78,7 @@
                     <textarea 
                         class="markdown-editor" 
                         id="markdownInput" 
+                        data-i18n="editorPlaceholder"
                         placeholder="在此输入您的Markdown简历内容...
 
 # 张三
@@ -136,25 +137,25 @@
                 <div class="tab-content" id="settingsTab">
                     <div class="settings-panel">
                         <div class="settings-section">
-                            <h3>模板选择</h3>
+                            <h3 data-i18n="templateSelection">模板选择</h3>
                             <div class="template-grid">
                                 <div class="template-card active" data-template="classic">
                                     <div class="template-preview"></div>
-                                    <span>经典模板</span>
+                                    <span data-i18n="classicTemplate">经典模板</span>
                                 </div>
                                 <div class="template-card" data-template="modern">
                                     <div class="template-preview"></div>
-                                    <span>现代模板</span>
+                                    <span data-i18n="modernTemplate">现代模板</span>
                                 </div>
                                 <div class="template-card" data-template="minimal">
                                     <div class="template-preview"></div>
-                                    <span>简约模板</span>
+                                    <span data-i18n="minimalTemplate">简约模板</span>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="settings-section">
-                            <h3>颜色主题</h3>
+                            <h3 data-i18n="colorTheme">颜色主题</h3>
                             <div class="color-picker">
                                 <div class="color-option active" data-color="blue" style="background: #3b82f6;"></div>
                                 <div class="color-option" data-color="green" style="background: #10b981;"></div>
@@ -165,27 +166,27 @@
                         </div>
                         
                         <div class="settings-section">
-                            <h3>字体设置</h3>
+                            <h3 data-i18n="fontSettings">字体设置</h3>
                             <div class="form-group">
-                                <label class="form-label">字体大小</label>
+                                <label class="form-label" data-i18n="fontSize">字体大小</label>
                                 <input type="range" class="form-range" id="fontSizeRange" min="12" max="18" value="16">
                                 <span class="range-value">16px</span>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">行高</label>
+                                <label class="form-label" data-i18n="lineHeight">行高</label>
                                 <input type="range" class="form-range" id="lineHeightRange" min="1.2" max="2.0" step="0.1" value="1.6">
                                 <span class="range-value">1.6</span>
                             </div>
                         </div>
                         
                         <div class="settings-section">
-                            <h3>页面设置</h3>
+                            <h3 data-i18n="pageSettings">页面设置</h3>
                             <div class="form-group">
-                                <label class="form-label">页面边距</label>
+                                <label class="form-label" data-i18n="pageMargin">页面边距</label>
                                 <select class="form-select" id="marginSelect">
-                                    <option value="normal">标准边距</option>
-                                    <option value="narrow">窄边距</option>
-                                    <option value="wide">宽边距</option>
+                                    <option value="normal" data-i18n="normalMargin">标准边距</option>
+                                    <option value="narrow" data-i18n="narrowMargin">窄边距</option>
+                                    <option value="wide" data-i18n="wideMargin">宽边距</option>
                                 </select>
                             </div>
                         </div>
@@ -198,17 +199,17 @@
                 <div class="preview-header">
                     <div class="preview-title">
                         <i class="fas fa-eye"></i>
-                        实时预览
+                        <span data-i18n="livePreview">实时预览</span>
                     </div>
                     <div class="preview-actions">
-                        <button class="btn btn-icon" id="zoomOutBtn" title="缩小">
+                        <button class="btn btn-icon" id="zoomOutBtn" data-i18n-title="zoomOut" title="缩小">
                             <i class="fas fa-search-minus"></i>
                         </button>
                         <span class="zoom-level">100%</span>
-                        <button class="btn btn-icon" id="zoomInBtn" title="放大">
+                        <button class="btn btn-icon" id="zoomInBtn" data-i18n-title="zoomIn" title="放大">
                             <i class="fas fa-search-plus"></i>
                         </button>
-                        <button class="btn btn-icon" id="fullscreenBtn" title="全屏预览">
+                        <button class="btn btn-icon" id="fullscreenBtn" data-i18n-title="fullscreen" title="全屏预览">
                             <i class="fas fa-expand"></i>
                         </button>
                     </div>
@@ -224,21 +225,21 @@
         <!-- Toolbar -->
         <aside class="toolbar">
             <div class="toolbar-section">
-                <button class="btn btn-icon" id="saveBtn" title="保存到本地存储">
+                <button class="btn btn-icon" id="saveBtn" data-i18n-title="saveToLocal" title="保存到本地存储">
                     <i class="fas fa-save"></i>
                 </button>
-                <button class="btn btn-icon" id="copyHtmlBtn" title="复制HTML代码">
+                <button class="btn btn-icon" id="copyHtmlBtn" data-i18n-title="copyHtml" title="复制HTML代码">
                     <i class="fas fa-code"></i>
                 </button>
-                <button class="btn btn-icon" id="printBtn" title="打印简历">
+                <button class="btn btn-icon" id="printBtn" data-i18n-title="printResume" title="打印简历">
                     <i class="fas fa-print"></i>
                 </button>
             </div>
             <div class="toolbar-section">
-                <button class="btn btn-icon" id="undoBtn" title="撤销">
+                <button class="btn btn-icon" id="undoBtn" data-i18n-title="undo" title="撤销">
                     <i class="fas fa-undo"></i>
                 </button>
-                <button class="btn btn-icon" id="redoBtn" title="重做">
+                <button class="btn btn-icon" id="redoBtn" data-i18n-title="redo" title="重做">
                     <i class="fas fa-redo"></i>
                 </button>
             </div>
@@ -252,7 +253,7 @@
     <div class="modal" id="importModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>导入Markdown文件</h3>
+                <h3 data-i18n="importMarkdown">导入Markdown文件</h3>
                 <button class="btn btn-icon modal-close">
                     <i class="fas fa-times"></i>
                 </button>
@@ -260,10 +261,10 @@
             <div class="modal-body">
                 <div class="file-drop-zone" id="fileDropZone">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <p>拖拽文件到此处或点击选择文件</p>
+                    <p data-i18n="dragDropFiles">拖拽文件到此处或点击选择文件</p>
                     <input type="file" id="fileInput" accept=".md,.txt" hidden>
                     <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
-                        选择文件
+                        <span data-i18n="selectFile">选择文件</span>
                     </button>
                 </div>
             </div>
@@ -271,10 +272,10 @@
     </div>
 
     <!-- Scripts -->
+    <script src="scripts/i18n.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/editor.js"></script>
-    <script src="scripts/preview.js"></script>
     <script src="scripts/export.js"></script>
-    <script src="scripts/templates.js"></script>
+    <script src="scripts/ui-utils.js"></script>
 </body>
 </html> 
