@@ -330,6 +330,28 @@ body {
   transition: transform var(--transition-normal);
 }
 
+/* ===== 全屏预览样式 ===== */
+.preview-panel.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-modal);
+  background: var(--bg-primary);
+}
+
+.preview-panel.fullscreen .preview-container {
+  padding: var(--space-4);
+}
+
+.preview-panel.fullscreen .preview-content {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  box-shadow: var(--shadow-xl);
+}
+
 /* ===== Toolbar ===== */
 .toolbar {
   grid-area: toolbar;
