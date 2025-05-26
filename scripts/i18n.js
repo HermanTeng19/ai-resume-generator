@@ -90,6 +90,34 @@ class I18n {
                 chinese: '中文',
                 english: 'English',
                 
+                // 模板选择器
+                selectResumeTemplate: '选择简历模板',
+                basicTemplate: '基础模板',
+                basicTemplateDesc: '适合初入职场的求职者',
+                basicTemplateTag1: '简洁',
+                basicTemplateTag2: '通用',
+                basicTemplateTag3: '入门',
+                
+                developerTemplate: '开发者模板',
+                developerTemplateDesc: '专为软件开发工程师设计',
+                developerTemplateTag1: '技术',
+                developerTemplateTag2: '开发',
+                developerTemplateTag3: '工程师',
+                
+                designerTemplate: '设计师模板',
+                designerTemplateDesc: '适合UI/UX设计师和创意工作者',
+                designerTemplateTag1: '设计',
+                designerTemplateTag2: '创意',
+                designerTemplateTag3: 'UI/UX',
+                
+                managerTemplate: '管理者模板',
+                managerTemplateDesc: '适合团队领导和项目经理',
+                managerTemplateTag1: '管理',
+                managerTemplateTag2: '领导',
+                managerTemplateTag3: '项目',
+                
+                confirmReplaceContent: '当前有内容，确定要替换为模板内容吗？',
+                
                 // 欢迎消息
                 welcomeMessage: '欢迎使用AI简历生成器',
                 welcomeDetail: '开始编辑您的Markdown简历吧！',
@@ -177,6 +205,34 @@ class I18n {
                 language: 'Language',
                 chinese: '中文',
                 english: 'English',
+                
+                // Template selector
+                selectResumeTemplate: 'Select Resume Template',
+                basicTemplate: 'Basic Template',
+                basicTemplateDesc: 'Suitable for entry-level job seekers',
+                basicTemplateTag1: 'Simple',
+                basicTemplateTag2: 'Universal',
+                basicTemplateTag3: 'Entry-level',
+                
+                developerTemplate: 'Developer Template',
+                developerTemplateDesc: 'Designed for software engineers',
+                developerTemplateTag1: 'Technical',
+                developerTemplateTag2: 'Development',
+                developerTemplateTag3: 'Engineering',
+                
+                designerTemplate: 'Designer Template',
+                designerTemplateDesc: 'Suitable for UI/UX designers and creative workers',
+                designerTemplateTag1: 'Design',
+                designerTemplateTag2: 'Creative',
+                designerTemplateTag3: 'UI/UX',
+                
+                managerTemplate: 'Manager Template',
+                managerTemplateDesc: 'Suitable for team leaders and project managers',
+                managerTemplateTag1: 'Management',
+                managerTemplateTag2: 'Leadership',
+                managerTemplateTag3: 'Project',
+                
+                confirmReplaceContent: 'Current content exists. Are you sure you want to replace it with template content?',
                 
                 // Welcome messages
                 welcomeMessage: 'Welcome to AI Resume Generator',

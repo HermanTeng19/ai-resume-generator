@@ -169,10 +169,14 @@ Object.assign(ResumeApp.prototype, {
     showTemplateSelector(templates) {
         const modal = document.createElement('div');
         modal.className = 'modal active';
+        
+        // 使用国际化翻译
+        const title = window.i18n ? window.i18n.t('selectResumeTemplate') : '选择简历模板';
+        
         modal.innerHTML = `
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>选择简历模板</h3>
+                    <h3>${title}</h3>
                     <button class="btn btn-icon modal-close">
                         <i class="fas fa-times"></i>
                     </button>
@@ -217,8 +221,11 @@ Object.assign(ResumeApp.prototype, {
      * 加载模板内容
      */
     loadTemplateContent(content) {
-        if (this.markdownInput.value.trim() && 
-            !confirm('当前有内容，确定要替换为模板内容吗？')) {
+        const confirmMessage = window.i18n ? 
+            window.i18n.t('confirmReplaceContent') : 
+            '当前有内容，确定要替换为模板内容吗？';
+            
+        if (this.markdownInput.value.trim() && !confirm(confirmMessage)) {
             return;
         }
 
@@ -226,18 +233,68 @@ Object.assign(ResumeApp.prototype, {
         this.markdownInput.value = content;
         this.updatePreview();
         this.saveToLocalStorage();
-        this.showToast('success', '模板已加载', '简历模板已成功加载');
+        
+        const successTitle = window.i18n ? window.i18n.t('templateLoaded') : '模板已加载';
+        const successMessage = window.i18n ? window.i18n.t('templateLoaded') : '简历模板已成功加载';
+        this.showToast('success', successTitle, successMessage);
     },
 
     /**
      * 获取基础模板
      */
     getBasicTemplate() {
+        const i18n = window.i18n;
         return {
-            name: '基础模板',
-            description: '适合初入职场的求职者',
-            tags: ['简洁', '通用', '入门'],
-            content: `# 您的姓名
+            name: i18n ? i18n.t('basicTemplate') : '基础模板',
+            description: i18n ? i18n.t('basicTemplateDesc') : '适合初入职场的求职者',
+            tags: i18n ? [
+                i18n.t('basicTemplateTag1'),
+                i18n.t('basicTemplateTag2'),
+                i18n.t('basicTemplateTag3')
+            ] : ['简洁', '通用', '入门'],
+            content: i18n && i18n.getCurrentLanguage() === 'en-US' ? 
+                `# Your Name
+**Job Title**
+
+## Contact Information
+- 📧 Email: your.email@example.com
+- 📱 Phone: +1 (555) 123-4567
+- 🏠 Address: Your City, State
+- 💼 LinkedIn: linkedin.com/in/yourname
+- 🐙 GitHub: github.com/yourname
+
+## Personal Summary
+Write a concise personal introduction here, highlighting your core skills and career objectives...
+
+## Education
+
+### Degree Name | University Name
+*Time Period*
+
+- Major courses or achievements
+- Relevant project experience
+
+## Work Experience
+
+### Job Title | Company Name
+*Time Period*
+
+- Main responsibilities and achievements
+- Technologies or tools used
+- Specific results achieved
+
+## Skills
+- **Skill Category 1**: Specific skill list
+- **Skill Category 2**: Specific skill list
+- **Skill Category 3**: Specific skill list
+
+## Projects
+
+### Project Name
+- Project description and your role
+- Technology stack used
+- Project outcomes and impact` :
+                `# 您的姓名
 **职位名称**
 
 ## 联系方式
@@ -285,11 +342,79 @@ Object.assign(ResumeApp.prototype, {
      * 获取开发者模板
      */
     getDeveloperTemplate() {
+        const i18n = window.i18n;
         return {
-            name: '开发者模板',
-            description: '专为软件开发工程师设计',
-            tags: ['技术', '开发', '工程师'],
-            content: `# 张三
+            name: i18n ? i18n.t('developerTemplate') : '开发者模板',
+            description: i18n ? i18n.t('developerTemplateDesc') : '专为软件开发工程师设计',
+            tags: i18n ? [
+                i18n.t('developerTemplateTag1'),
+                i18n.t('developerTemplateTag2'),
+                i18n.t('developerTemplateTag3')
+            ] : ['技术', '开发', '工程师'],
+            content: i18n && i18n.getCurrentLanguage() === 'en-US' ? 
+                `# John Smith
+**Full Stack Developer**
+
+## Contact Information
+- 📧 Email: johnsmith@example.com
+- 📱 Phone: +1 (555) 123-4567
+- 🏠 Address: New York, NY
+- 💼 LinkedIn: linkedin.com/in/johnsmith
+- 🐙 GitHub: github.com/johnsmith
+- 🌐 Website: https://johnsmith.dev
+
+## Technical Skills
+- **Frontend**: React, Vue.js, TypeScript, JavaScript, HTML5, CSS3
+- **Backend**: Node.js, Python, Java, Express, Django, Spring Boot
+- **Database**: MySQL, PostgreSQL, MongoDB, Redis
+- **Tools**: Git, Docker, Kubernetes, AWS, Jenkins
+- **Other**: RESTful API, GraphQL, Microservices, Agile Development
+
+## Work Experience
+
+### Senior Full Stack Developer | ABC Technology Company
+*June 2021 - Present*
+
+- Lead full-stack development for core products with 1M+ users
+- Built high-performance web applications using React + Node.js, improving page load speed by 40%
+- Designed and implemented microservices architecture, enhancing system scalability and maintainability
+- Led a team of 5 developers, mentoring junior developers in technical growth
+
+### Frontend Developer | XYZ Internet Company
+*March 2019 - May 2021*
+
+- Developed and maintained multiple B2C e-commerce platform frontend applications
+- Refactored legacy code using Vue.js and TypeScript, significantly improving code quality
+- Implemented responsive design supporting multiple devices and browsers
+- Collaborated closely with UI/UX designers to ensure perfect design implementation
+
+## Project Experience
+
+### Enterprise SaaS Management Platform
+**Tech Stack**: React, TypeScript, Node.js, PostgreSQL, Docker
+
+- Designed and developed enterprise-level SaaS platform from scratch
+- Implemented complex permission management and multi-tenant architecture
+- Integrated third-party APIs and payment systems
+- Serving 500+ enterprise customers with 98% satisfaction rate
+
+### Real-time Collaborative Editor
+**Tech Stack**: Vue.js, WebSocket, Express, MongoDB
+
+- Developed real-time collaborative editor similar to Google Docs
+- Implemented operational transformation algorithms ensuring multi-user editing consistency
+- Supported rich text editing, comments, version history features
+- Daily active users exceeding 10,000
+
+## Education
+
+### Bachelor of Computer Science | Tsinghua University
+*September 2015 - June 2019*
+
+- GPA: 3.8/4.0
+- Relevant Coursework: Data Structures, Algorithms, Database Systems, Software Engineering
+- Graduation Project: Distributed System Design and Implementation` :
+                `# 张三
 **全栈开发工程师**
 
 ## 联系方式
@@ -376,11 +501,56 @@ Object.assign(ResumeApp.prototype, {
      * 获取设计师模板
      */
     getDesignerTemplate() {
+        const i18n = window.i18n;
         return {
-            name: '设计师模板',
-            description: '适合UI/UX设计师和创意工作者',
-            tags: ['设计', '创意', 'UI/UX'],
-            content: `# 李设计
+            name: i18n ? i18n.t('designerTemplate') : '设计师模板',
+            description: i18n ? i18n.t('designerTemplateDesc') : '适合UI/UX设计师和创意工作者',
+            tags: i18n ? [
+                i18n.t('designerTemplateTag1'),
+                i18n.t('designerTemplateTag2'),
+                i18n.t('designerTemplateTag3')
+            ] : ['设计', '创意', 'UI/UX'],
+            content: i18n && i18n.getCurrentLanguage() === 'en-US' ? 
+                `# Jane Designer
+**UI/UX Designer**
+
+## Contact Information
+- 📧 Email: janedesigner@example.com
+- 📱 Phone: +1 (555) 123-4567
+- 🏠 Address: San Francisco, CA
+- 💼 LinkedIn: linkedin.com/in/janedesigner
+- 🎨 Behance: behance.net/janedesigner
+- 📷 Dribbble: dribbble.com/janedesigner
+
+## Design Philosophy
+User-centered design thinking, pursuing simple yet expressive visual language, committed to creating digital product experiences that are both beautiful and practical.
+
+## Core Skills
+- **Design Tools**: Figma, Sketch, Adobe Creative Suite, Principle, Framer
+- **User Research**: User Interviews, Usability Testing, A/B Testing, Data Analysis
+- **Design Methods**: Design Thinking, User Journey Mapping, Information Architecture, Prototyping
+- **Frontend Skills**: HTML, CSS, JavaScript Basics, Responsive Design
+- **Collaboration Tools**: Slack, Notion, Miro, Zeplin, Abstract
+
+## Work Experience
+
+### Senior UI/UX Designer | Innovation Tech Company
+*August 2020 - Present*
+
+- Responsible for user experience design of company's main products, improving user satisfaction by 35%
+- Established and maintained design system, improving team design efficiency by 50%
+- Worked closely with product managers and development teams to ensure perfect implementation of design solutions
+- Mentored junior designers, established design review processes and standards
+
+## Education
+
+### Bachelor of Visual Communication Design | Central Academy of Fine Arts
+*September 2014 - June 2018*
+
+- Top 10% in major
+- Major Courses: Graphic Design, Interaction Design, User Experience, Color Theory
+- Graduation Project: Urban Public Space Wayfinding System Design` :
+                `# 李设计
 **UI/UX设计师**
 
 ## 联系方式
@@ -472,11 +642,61 @@ Object.assign(ResumeApp.prototype, {
      * 获取管理者模板
      */
     getManagerTemplate() {
+        const i18n = window.i18n;
         return {
-            name: '管理者模板',
-            description: '适合团队领导和项目经理',
-            tags: ['管理', '领导', '项目'],
-            content: `# 王经理
+            name: i18n ? i18n.t('managerTemplate') : '管理者模板',
+            description: i18n ? i18n.t('managerTemplateDesc') : '适合团队领导和项目经理',
+            tags: i18n ? [
+                i18n.t('managerTemplateTag1'),
+                i18n.t('managerTemplateTag2'),
+                i18n.t('managerTemplateTag3')
+            ] : ['管理', '领导', '项目'],
+            content: i18n && i18n.getCurrentLanguage() === 'en-US' ? 
+                `# Mike Manager
+**Product Director / Project Management Expert**
+
+## Contact Information
+- 📧 Email: mikemanager@example.com
+- 📱 Phone: +1 (555) 123-4567
+- 🏠 Address: Seattle, WA
+- 💼 LinkedIn: linkedin.com/in/mikemanager
+- 🐙 GitHub: github.com/mikemanager
+
+## Management Philosophy
+People-oriented team management, data-driven decision making, continuous improvement product thinking. Committed to building efficient collaborative team culture and driving continuous growth of products and business.
+
+## Core Competencies
+- **Team Management**: Team Building, Talent Development, Performance Management, Cross-functional Collaboration
+- **Product Management**: Product Strategy, Requirements Analysis, User Research, Data Analysis
+- **Project Management**: Agile Development, Scrum, Risk Control, Resource Allocation
+- **Business Analysis**: Market Analysis, Competitive Analysis, Business Models, ROI Analysis
+- **Technical Understanding**: Software Development Process, Technical Architecture, Quality Assurance
+
+## Work Experience
+
+### Product Director | Unicorn Tech Company
+*August 2019 - Present*
+
+- Responsible for company's core product lines, managing 30+ product and technical team members
+- Developed product strategy and roadmap, driving product breakthrough from 0 to 1
+- Established data-driven product decision system, achieving 200% user growth rate
+- Annual revenue grew from $500K to $5M, secured Series B funding of $20M
+
+## Education
+
+### MBA | Stanford Graduate School of Business
+*September 2012 - June 2014*
+
+- Concentration: Technology Management and Innovation
+- GPA: 3.9/4.0
+- Leadership roles in multiple student organizations
+
+### Bachelor of Computer Science | UC Berkeley
+*September 2008 - June 2012*
+
+- Magna Cum Laude graduate
+- Major: Computer Science, Minor: Business Administration` :
+                `# 王经理
 **产品总监 / 项目管理专家**
 
 ## 联系方式
