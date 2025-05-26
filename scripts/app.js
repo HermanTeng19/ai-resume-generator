@@ -92,7 +92,9 @@ class ResumeApp {
         // 标签页切换
         this.tabButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                this.switchTab(e.target.dataset.tab);
+                // 确保获取按钮元素的dataset.tab，而不是子元素的
+                const button = e.currentTarget;
+                this.switchTab(button.dataset.tab);
             });
         });
 
@@ -172,6 +174,11 @@ class ResumeApp {
      * 切换标签页
      */
     switchTab(tabName) {
+        if (!tabName) {
+            console.error('switchTab: tabName is undefined');
+            return;
+        }
+
         // 更新标签按钮状态
         this.tabButtons.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.tab === tabName);
@@ -179,7 +186,8 @@ class ResumeApp {
 
         // 更新标签内容显示
         this.tabContents.forEach(content => {
-            content.classList.toggle('active', content.id === `${tabName}Tab`);
+            const expectedId = `${tabName}Tab`;
+            content.classList.toggle('active', content.id === expectedId);
         });
     }
 
@@ -489,6 +497,10 @@ class ResumeApp {
                 console.error('加载本地存储失败:', error);
             }
         } else {
+            // 如果没有保存的数据，加载示例内容
+            if (window.i18n && typeof window.i18n.getSampleContent === 'function') {
+                this.markdownInput.value = window.i18n.getSampleContent();
+            }
             // 初始化撤销栈
             this.saveToUndoStack();
         }
