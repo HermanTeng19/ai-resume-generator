@@ -101,7 +101,7 @@ class ResumeApp {
         // 主要功能按钮
         this.exportBtn.addEventListener('click', () => this.exportHTML());
         this.importBtn.addEventListener('click', () => this.showImportModal());
-        this.saveBtn.addEventListener('click', () => this.saveToLocalStorage(true));
+        this.saveBtn.addEventListener('click', () => this.exportMarkdown());
         this.clearBtn.addEventListener('click', () => this.clearContent());
         this.copyHtmlBtn.addEventListener('click', () => this.copyHTML());
         this.printBtn.addEventListener('click', () => this.printResume());
@@ -613,7 +613,7 @@ class ResumeApp {
             switch (e.key) {
                 case 's':
                     e.preventDefault();
-                    this.saveToLocalStorage(true);
+                    this.exportMarkdown();
                     break;
                 case 'z':
                     e.preventDefault();

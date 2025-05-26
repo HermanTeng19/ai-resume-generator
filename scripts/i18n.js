@@ -32,6 +32,7 @@ class I18n {
                 
                 // 工具栏
                 saveToLocal: '保存到本地存储',
+                downloadMarkdown: '下载Markdown文件',
                 copyHtml: '复制HTML代码',
                 printResume: '打印简历',
                 undo: '撤销',
@@ -81,6 +82,10 @@ class I18n {
                 
                 // 消息提示
                 fileSaved: '文件已保存到本地存储',
+                exportSuccess: '导出成功',
+                exportFailed: '导出失败',
+                markdownDownloaded: 'Markdown文件已下载到本地',
+                markdownDownloadFailed: '无法生成Markdown文件',
                 htmlCopied: 'HTML代码已复制到剪贴板',
                 fileImported: '文件导入成功',
                 templateLoaded: '模板加载成功',
@@ -148,6 +153,7 @@ class I18n {
                 
                 // Toolbar
                 saveToLocal: 'Save to Local Storage',
+                downloadMarkdown: 'Download Markdown File',
                 copyHtml: 'Copy HTML Code',
                 printResume: 'Print Resume',
                 undo: 'Undo',
@@ -197,6 +203,10 @@ class I18n {
                 
                 // Messages
                 fileSaved: 'File saved to local storage',
+                exportSuccess: 'Export Successful',
+                exportFailed: 'Export Failed',
+                markdownDownloaded: 'Markdown file downloaded successfully',
+                markdownDownloadFailed: 'Failed to generate Markdown file',
                 htmlCopied: 'HTML code copied to clipboard',
                 fileImported: 'File imported successfully',
                 templateLoaded: 'Template loaded successfully',

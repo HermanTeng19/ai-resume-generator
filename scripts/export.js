@@ -611,10 +611,14 @@ body {
             
             URL.revokeObjectURL(url);
             
-            this.showToast('success', '导出成功', 'Markdown文件已下载到本地');
+            const successTitle = window.i18n ? window.i18n.t('exportSuccess') || '导出成功' : '导出成功';
+            const successMessage = window.i18n ? window.i18n.t('markdownDownloaded') : 'Markdown文件已下载到本地';
+            this.showToast('success', successTitle, successMessage);
         } catch (error) {
             console.error('导出Markdown失败:', error);
-            this.showToast('error', '导出失败', '无法生成Markdown文件');
+            const errorTitle = window.i18n ? window.i18n.t('exportFailed') || '导出失败' : '导出失败';
+            const errorMessage = window.i18n ? window.i18n.t('markdownDownloadFailed') : '无法生成Markdown文件';
+            this.showToast('error', errorTitle, errorMessage);
         }
     }
 }); 
