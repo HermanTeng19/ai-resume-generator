@@ -221,6 +221,22 @@ ai-resume-generator/
 - [FontAwesome](https://fontawesome.com/) - 图标库
 - [Google Fonts](https://fonts.google.com/) - 字体服务
 
+## 🌍 多语言文档
+
+本项目提供中英文双语文档：
+
+### 中文文档
+- [README.md](README.md) - 项目说明
+- [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - 项目总结
+- [QUICK_START.md](QUICK_START.md) - 快速开始
+- [STARTUP_GUIDE.md](STARTUP_GUIDE.md) - 启动指南
+
+### English Documentation
+- [README_EN.md](README_EN.md) - Project Documentation
+- [PROJECT_SUMMARY_EN.md](PROJECT_SUMMARY_EN.md) - Project Summary
+- [QUICK_START_EN.md](QUICK_START_EN.md) - Quick Start Guide
+- [STARTUP_GUIDE_EN.md](STARTUP_GUIDE_EN.md) - Startup Methods Guide
+
 ## 📞 联系方式
 
 如有问题或建议，请通过以下方式联系：
