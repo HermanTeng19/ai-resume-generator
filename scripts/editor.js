@@ -203,7 +203,8 @@ Object.assign(ResumeApp.prototype, {
 
         // 绑定事件
         modal.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-close') || e.target.classList.contains('modal')) {
+            // 检查是否点击了关闭按钮或其子元素
+            if (e.target.closest('.modal-close') || e.target.classList.contains('modal')) {
                 document.body.removeChild(modal);
             }
         });

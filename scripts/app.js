@@ -151,7 +151,8 @@ class ResumeApp {
 
         // 模态框关闭
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-close') || e.target.classList.contains('modal')) {
+            // 检查是否点击了关闭按钮或其子元素
+            if (e.target.closest('.modal-close') || e.target.classList.contains('modal')) {
                 this.closeModal();
             }
         });
