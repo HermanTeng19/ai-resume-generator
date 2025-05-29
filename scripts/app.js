@@ -14,6 +14,11 @@ class ResumeApp {
         this.redoStack = [];
         this.maxUndoSteps = 50;
         
+        // 字体设置默认值
+        this.fontSize = 16;
+        this.lineHeight = 1.6;
+        this.pageMargin = 'normal';
+        
         this.init();
     }
 
@@ -24,6 +29,7 @@ class ResumeApp {
         this.initializeElements();
         this.bindEvents();
         this.loadFromLocalStorage();
+        this.initializeFontSettings();
         this.updatePreview();
         this.showWelcomeToast();
         
@@ -309,6 +315,7 @@ class ResumeApp {
     updateFontSize(size) {
         document.documentElement.style.setProperty('--resume-font-size', `${size}px`);
         document.querySelector('#fontSizeRange + .range-value').textContent = `${size}px`;
+        this.fontSize = parseInt(size);
         this.updatePreview();
     }
 
@@ -318,6 +325,7 @@ class ResumeApp {
     updateLineHeight(height) {
         document.documentElement.style.setProperty('--resume-line-height', height);
         document.querySelector('#lineHeightRange + .range-value').textContent = height;
+        this.lineHeight = parseFloat(height);
         this.updatePreview();
     }
 
@@ -332,7 +340,25 @@ class ResumeApp {
         };
         
         document.documentElement.style.setProperty('--resume-margin', margins[margin]);
+        this.pageMargin = margin;
         this.updatePreview();
+    }
+
+    /**
+     * 初始化字体设置
+     */
+    initializeFontSettings() {
+        // 设置字体大小
+        this.updateFontSize(this.fontSize);
+        this.fontSizeRange.value = this.fontSize;
+        
+        // 设置行高
+        this.updateLineHeight(this.lineHeight);
+        this.lineHeightRange.value = this.lineHeight;
+        
+        // 设置页面边距
+        this.updateMargin(this.pageMargin);
+        this.marginSelect.value = this.pageMargin;
     }
 
     /**
@@ -476,6 +502,9 @@ class ResumeApp {
             zoom: this.currentZoom,
             isDarkMode: this.isDarkMode,
             isLayoutVertical: this.isLayoutVertical,
+            fontSize: this.fontSize,
+            lineHeight: this.lineHeight,
+            pageMargin: this.pageMargin,
             timestamp: Date.now()
         };
         
@@ -502,6 +531,9 @@ class ResumeApp {
                 this.currentZoom = data.zoom || 100;
                 this.isDarkMode = data.isDarkMode || false;
                 this.isLayoutVertical = data.isLayoutVertical || false;
+                this.fontSize = data.fontSize || 16;
+                this.lineHeight = data.lineHeight || 1.6;
+                this.pageMargin = data.pageMargin || 'normal';
                 
                 // 应用设置
                 this.selectTemplate(this.currentTemplate);

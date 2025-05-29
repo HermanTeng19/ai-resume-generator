@@ -1,8 +1,17 @@
+/* ===== CSS变量定义 ===== */
+:root {
+  /* 动态字体设置变量 */
+  --resume-font-size: 16px;
+  --resume-line-height: 1.6;
+  --resume-margin: 2rem;
+}
+
 /* ===== 简历模板基础样式 ===== */
 .resume-content {
-  padding: var(--space-8);
+  padding: var(--resume-margin);
   font-family: var(--font-primary);
-  line-height: 1.6;
+  font-size: var(--resume-font-size);
+  line-height: var(--resume-line-height);
   color: var(--text-primary);
   background: white;
   max-width: 100%;
