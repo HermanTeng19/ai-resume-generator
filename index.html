@@ -3,29 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI简历生成器 - Markdown转HTML简历工具</title>
+    <title>AI Resume Generator | AI简历生成器 - Professional Resume Builder</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="免费在线AI简历生成器，支持Markdown编辑，多种专业模板，实时预览，一键导出HTML/PDF。Free online AI resume generator with Markdown editor, professional templates, live preview, and export to HTML/PDF.">
-    <meta name="keywords" content="简历生成器,resume generator,markdown,cv,简历模板,resume template,在线简历,online resume,AI简历,简历制作工具">
+    <meta name="description" content="Free online AI resume generator with Markdown editor, professional templates, live preview, and export to HTML/PDF. 免费在线AI简历生成器，支持Markdown编辑，多种专业模板，实时预览，一键导出HTML/PDF。">
+    <meta name="keywords" content="resume generator,简历生成器,CV builder,markdown editor,resume template,简历模板,online resume,在线简历,professional resume,AI resume,career tools,job application">
     <meta name="author" content="AI Resume Generator">
     <meta name="robots" content="index, follow">
-    <meta name="language" content="zh-CN">
+    <meta name="language" content="zh-CN,en">
+    
+    <!-- Internationalization -->
+    <link rel="alternate" hreflang="zh-CN" href="https://ai-resume-generator.vercel.app/">
+    <link rel="alternate" hreflang="en" href="https://ai-resume-generator.vercel.app/">
+    <link rel="alternate" hreflang="x-default" href="https://ai-resume-generator.vercel.app/">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="AI简历生成器 - 专业简历制作工具">
-    <meta property="og:description" content="免费在线AI简历生成器，支持Markdown编辑，多种专业模板，实时预览，一键导出">
+    <meta property="og:title" content="AI Resume Generator | Professional Resume Builder">
+    <meta property="og:description" content="Create professional resumes with our free AI-powered generator. Markdown editor, multiple templates, live preview, and instant export.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ai-resume-generator.vercel.app">
     <meta property="og:image" content="https://ai-resume-generator.vercel.app/og-image.png">
-    <meta property="og:site_name" content="AI简历生成器">
-    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image:alt" content="AI Resume Generator - Professional Resume Builder Interface">
+    <meta property="og:site_name" content="AI Resume Generator">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI简历生成器 - 专业简历制作工具">
-    <meta name="twitter:description" content="免费在线AI简历生成器，支持Markdown编辑，多种专业模板">
+    <meta name="twitter:title" content="AI Resume Generator | Professional Resume Builder">
+    <meta name="twitter:description" content="Create professional resumes with our free AI-powered generator. Markdown editor, multiple templates, live preview.">
     <meta name="twitter:image" content="https://ai-resume-generator.vercel.app/og-image.png">
+    <meta name="twitter:image:alt" content="AI Resume Generator Interface">
+    <meta name="twitter:site" content="@ai_resume_gen">
+    <meta name="twitter:creator" content="@ai_resume_gen">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -38,7 +48,9 @@
     <meta name="theme-color" content="#3b82f6">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="AI简历生成器">
+    <meta name="apple-mobile-web-app-title" content="Resume Generator">
+    <meta name="msapplication-TileColor" content="#3b82f6">
+    <meta name="msapplication-config" content="/browserconfig.xml">
     
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles/main.css" as="style">
@@ -65,11 +77,14 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "AI简历生成器",
-      "description": "免费在线AI简历生成器，支持Markdown编辑，多种专业模板，实时预览，一键导出",
+      "name": "AI Resume Generator",
+      "alternateName": "AI简历生成器",
+      "description": "Free online AI-powered resume generator with Markdown editor, professional templates, live preview, and export capabilities",
       "url": "https://ai-resume-generator.vercel.app",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.0.0",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -78,7 +93,20 @@
       "author": {
         "@type": "Organization",
         "name": "AI Resume Generator"
-      }
+      },
+      "inLanguage": ["en", "zh-CN"],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Job seekers, professionals, students"
+      },
+      "featureList": [
+        "Markdown editor",
+        "Multiple professional templates", 
+        "Live preview",
+        "HTML/PDF export",
+        "Responsive design",
+        "Dark mode support"
+      ]
     }
     </script>
 </head>

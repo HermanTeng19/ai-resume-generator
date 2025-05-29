@@ -1,7 +1,9 @@
 {
-  "name": "AI简历生成器",
-  "short_name": "简历生成器",
-  "description": "专业的在线简历制作工具，支持Markdown编辑，多种模板，实时预览",
+  "name": "AI Resume Generator | AI简历生成器",
+  "short_name": "Resume Gen",
+  "description": "Professional online resume builder with Markdown editor, multiple templates, and live preview. 专业的在线简历制作工具，支持Markdown编辑，多种模板，实时预览。",
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/favicon-192x192.png",
@@ -14,6 +16,18 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "theme_color": "#3b82f6",
@@ -22,6 +36,82 @@
   "start_url": "/",
   "scope": "/",
   "orientation": "portrait-primary",
-  "categories": ["productivity", "business", "utilities"],
-  "lang": "zh-CN"
+  "categories": [
+    "productivity", 
+    "business", 
+    "utilities", 
+    "education",
+    "lifestyle"
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop view of AI Resume Generator"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of AI Resume Generator"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Resume | 新建简历",
+      "short_name": "New",
+      "description": "Create a new resume from scratch | 从头开始创建新简历",
+      "url": "/?action=new",
+      "icons": [
+        {
+          "src": "/icon-new-resume.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Templates | 模板库",
+      "short_name": "Templates",
+      "description": "Browse resume templates | 浏览简历模板",
+      "url": "/?tab=settings",
+      "icons": [
+        {
+          "src": "/icon-templates.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Export | 导出",
+      "short_name": "Export",
+      "description": "Export resume to HTML/PDF | 导出简历为HTML/PDF",
+      "url": "/?action=export",
+      "icons": [
+        {
+          "src": "/icon-export.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+resume",
+      "url": "/?import=%s"
+    }
+  ]
 } 
