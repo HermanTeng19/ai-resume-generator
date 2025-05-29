@@ -3,16 +3,12 @@
   "name": "ai-resume-generator",
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/landing.html"
-    },
-    {
       "source": "/app",
-      "destination": "/index.html"
+      "destination": "/app.html"
     },
     {
       "source": "/editor",
-      "destination": "/index.html"
+      "destination": "/app.html"
     }
   ],
   "headers": [

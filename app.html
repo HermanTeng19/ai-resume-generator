@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Generator | AI简历生成器 - Professional Resume Builder</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free online AI resume generator with Markdown editor, professional templates, live preview, and export to HTML/PDF. 免费在线AI简历生成器，支持Markdown编辑，多种专业模板，实时预览，一键导出HTML/PDF。">
+    <meta name="keywords" content="resume generator,简历生成器,CV builder,markdown editor,resume template,简历模板,online resume,在线简历,professional resume,AI resume,career tools,job application">
+    <meta name="author" content="AI Resume Generator">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN,en">
+    
+    <!-- Internationalization -->
+    <link rel="alternate" hreflang="zh-CN" href="https://ai-resume-generator.vercel.app/">
+    <link rel="alternate" hreflang="en" href="https://ai-resume-generator.vercel.app/">
+    <link rel="alternate" hreflang="x-default" href="https://ai-resume-generator.vercel.app/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI Resume Generator | Professional Resume Builder">
+    <meta property="og:description" content="Create professional resumes with our free AI-powered generator. Markdown editor, multiple templates, live preview, and instant export.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ai-resume-generator.vercel.app">
+    <meta property="og:image" content="https://ai-resume-generator.vercel.app/og-image.png">
+    <meta property="og:image:alt" content="AI Resume Generator - Professional Resume Builder Interface">
+    <meta property="og:site_name" content="AI Resume Generator">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Resume Generator | Professional Resume Builder">
+    <meta name="twitter:description" content="Create professional resumes with our free AI-powered generator. Markdown editor, multiple templates, live preview.">
+    <meta name="twitter:image" content="https://ai-resume-generator.vercel.app/og-image.png">
+    <meta name="twitter:image:alt" content="AI Resume Generator Interface">
+    <meta name="twitter:site" content="@ai_resume_gen">
+    <meta name="twitter:creator" content="@ai_resume_gen">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- PWA Support -->
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Resume Generator">
+    <meta name="msapplication-TileColor" content="#3b82f6">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles/main.css" as="style">
+    <link rel="preload" href="scripts/app.js" as="script">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/resume-templates.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "AI Resume Generator",
+      "alternateName": "AI简历生成器",
+      "description": "Free online AI-powered resume generator with Markdown editor, professional templates, live preview, and export capabilities",
+      "url": "https://ai-resume-generator.vercel.app",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.0.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "AI Resume Generator"
+      },
+      "inLanguage": ["en", "zh-CN"],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Job seekers, professionals, students"
+      },
+      "featureList": [
+        "Markdown editor",
+        "Multiple professional templates", 
+        "Live preview",
+        "HTML/PDF export",
+        "Responsive design",
+        "Dark mode support"
+      ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit;">
+                    <i class="fas fa-file-alt"></i>
+                    <span data-i18n="appName">AI简历生成器</span>
+                </a>
+            </div>
+            <nav class="nav-actions">
+                <a href="index.html" class="btn btn-secondary" style="text-decoration: none;">
+                    <i class="fas fa-home"></i>
+                    <span>返回首页</span>
+                </a>
+                <button class="btn btn-icon" id="toggleTheme" data-i18n-title="toggleTheme" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-icon" id="toggleLayout" data-i18n-title="toggleLayout" title="切换布局">
+                    <i class="fas fa-columns"></i>
+                </button>
+                <button class="btn btn-secondary" id="importBtn">
+                    <i class="fas fa-upload"></i>
+                    <span data-i18n="import">导入</span>
+                </button>
+                <button class="btn btn-primary" id="exportBtn">
+                    <i class="fas fa-download"></i>
+                    <span data-i18n="export">导出HTML</span>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Editor Panel -->
+            <section class="editor-panel">
+                <div class="editor-header">
+                    <div class="editor-tabs">
+                        <button class="tab-btn active" data-tab="markdown">
+                            <i class="fab fa-markdown"></i>
+                            <span data-i18n="markdownEditor">Markdown编辑器</span>
+                        </button>
+                        <button class="tab-btn" data-tab="settings">
+                            <i class="fas fa-cog"></i>
+                            <span data-i18n="styleSettings">样式设置</span>
+                        </button>
+                    </div>
+                    <div class="editor-actions">
+                        <button class="btn btn-icon" id="clearBtn" data-i18n-title="clearContent" title="清空内容">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="btn btn-icon" id="loadTemplateBtn" data-i18n-title="loadTemplate" title="加载模板">
+                            <i class="fas fa-file-import"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Markdown Editor Tab -->
+                <div class="tab-content active" id="markdownTab">
+                    <textarea 
+                        class="markdown-editor" 
+                        id="markdownInput" 
+                        data-i18n="editorPlaceholder"
+                        placeholder="在此输入您的Markdown简历内容..."></textarea>
+                </div>
+                
+                <!-- Settings Tab -->
+                <div class="tab-content" id="settingsTab">
+                    <div class="settings-panel">
+                        <div class="settings-section">
+                            <h3 data-i18n="templateSelection">模板选择</h3>
+                            <div class="template-grid">
+                                <div class="template-card active" data-template="classic">
+                                    <div class="template-preview"></div>
+                                    <span data-i18n="classicTemplate">经典模板</span>
+                                </div>
+                                <div class="template-card" data-template="modern">
+                                    <div class="template-preview"></div>
+                                    <span data-i18n="modernTemplate">现代模板</span>
+                                </div>
+                                <div class="template-card" data-template="minimal">
+                                    <div class="template-preview"></div>
+                                    <span data-i18n="minimalTemplate">简约模板</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3 data-i18n="colorTheme">颜色主题</h3>
+                            <div class="color-picker">
+                                <div class="color-option active" data-color="blue" style="background: #3b82f6;"></div>
+                                <div class="color-option" data-color="green" style="background: #10b981;"></div>
+                                <div class="color-option" data-color="purple" style="background: #8b5cf6;"></div>
+                                <div class="color-option" data-color="red" style="background: #ef4444;"></div>
+                                <div class="color-option" data-color="gray" style="background: #6b7280;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3 data-i18n="fontSettings">字体设置</h3>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="fontSize">字体大小</label>
+                                <input type="range" class="form-range" id="fontSizeRange" min="12" max="18" value="16">
+                                <span class="range-value">16px</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="lineHeight">行高</label>
+                                <input type="range" class="form-range" id="lineHeightRange" min="1.2" max="2.0" step="0.1" value="1.6">
+                                <span class="range-value">1.6</span>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3 data-i18n="pageSettings">页面设置</h3>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="pageMargin">页面边距</label>
+                                <select class="form-select" id="marginSelect">
+                                    <option value="normal" data-i18n="normalMargin">标准边距</option>
+                                    <option value="narrow" data-i18n="narrowMargin">窄边距</option>
+                                    <option value="wide" data-i18n="wideMargin">宽边距</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" id="scrollSyncToggle" checked>
+                                    <span data-i18n="scrollSync">滚动同步</span>
+                                </label>
+                                <small class="form-help" data-i18n="scrollSyncHelp">编辑器和预览面板滚动位置同步</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Panel -->
+            <section class="preview-panel">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <i class="fas fa-eye"></i>
+                        <span data-i18n="livePreview">实时预览</span>
+                    </div>
+                    <div class="preview-actions">
+                        <button class="btn btn-icon" id="zoomOutBtn" data-i18n-title="zoomOut" title="缩小">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <span class="zoom-level">100%</span>
+                        <button class="btn btn-icon" id="zoomInBtn" data-i18n-title="zoomIn" title="放大">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button class="btn btn-icon" id="fullscreenBtn" data-i18n-title="fullscreen" title="全屏预览">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="preview-container">
+                    <div class="preview-content" id="previewContent">
+                        <!-- 预览内容将在这里动态生成 -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Toolbar -->
+        <aside class="toolbar">
+            <div class="toolbar-section">
+                <button class="btn btn-icon" id="saveBtn" data-i18n-title="downloadMarkdown" title="下载Markdown文件">
+                    <i class="fas fa-download"></i>
+                </button>
+                <button class="btn btn-icon" id="copyHtmlBtn" data-i18n-title="copyHtml" title="复制HTML代码">
+                    <i class="fas fa-code"></i>
+                </button>
+                <button class="btn btn-icon" id="printBtn" data-i18n-title="printResume" title="打印简历">
+                    <i class="fas fa-print"></i>
+                </button>
+            </div>
+            <div class="toolbar-section">
+                <button class="btn btn-icon" id="undoBtn" data-i18n-title="undo" title="撤销">
+                    <i class="fas fa-undo"></i>
+                </button>
+                <button class="btn btn-icon" id="redoBtn" data-i18n-title="redo" title="重做">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Modal for Import -->
+    <div class="modal" id="importModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-i18n="importMarkdown">导入Markdown文件</h3>
+                <button class="btn btn-icon modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="file-drop-zone" id="fileDropZone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p data-i18n="dragDropFiles">拖拽文件到此处或点击选择文件</p>
+                    <input type="file" id="fileInput" accept=".md,.txt" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        <span data-i18n="selectFile">选择文件</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/i18n.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/editor.js"></script>
+    <script src="scripts/export.js"></script>
+    <script src="scripts/ui-utils.js"></script>
+</body>
+</html> 
