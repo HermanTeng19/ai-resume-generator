@@ -3,6 +3,14 @@
   "name": "ai-resume-generator",
   "builds": [
     {
+      "src": "landing.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "landing-en.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "index.html",
       "use": "@vercel/static"
     },
@@ -17,7 +25,15 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/",
+      "destination": "/landing.html"
+    },
+    {
+      "source": "/app",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/editor",
       "destination": "/index.html"
     }
   ],
