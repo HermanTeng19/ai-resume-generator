@@ -13,6 +13,7 @@ class I18n {
                 appName: 'AI简历生成器',
                 
                 // 导航栏
+                backToHome: '返回首页',
                 toggleTheme: '切换主题',
                 toggleLayout: '切换布局',
                 import: '导入',
@@ -190,6 +191,7 @@ class I18n {
                 appName: 'AI Resume Generator',
                 
                 // Navigation
+                backToHome: 'Back to Home',
                 toggleTheme: 'Toggle Theme',
                 toggleLayout: 'Toggle Layout',
                 import: 'Import',
