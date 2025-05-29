@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- 主页 -->
+  <url>
+    <loc>https://ai-resume-generator.vercel.app/</loc>
+    <lastmod>2024-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ai-resume-generator.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ai-resume-generator.vercel.app/" />
+  </url>
+  
+  <!-- 示例简历页面 -->
+  <url>
+    <loc>https://ai-resume-generator.vercel.app/example-resume.md</loc>
+    <lastmod>2024-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://ai-resume-generator.vercel.app/example-resume-en.md</loc>
+    <lastmod>2024-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- 项目文档 -->
+  <url>
+    <loc>https://ai-resume-generator.vercel.app/README.md</loc>
+    <lastmod>2024-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ai-resume-generator.vercel.app/README_EN.md</loc>
+    <lastmod>2024-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- 快速开始指南 -->
+  <url>
+    <loc>https://ai-resume-generator.vercel.app/QUICK_START.md</loc>
+    <lastmod>2024-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://ai-resume-generator.vercel.app/QUICK_START_EN.md</loc>
+    <lastmod>2024-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset> 

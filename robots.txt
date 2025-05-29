@@ -1,0 +1,34 @@
+# AI简历生成器 robots.txt
+User-agent: *
+
+# 允许索引所有公开内容
+Allow: /
+
+# 保护用户隐私 - 阻止索引可能包含个人信息的路径
+Disallow: /user-data/
+Disallow: /temp/
+Disallow: /cache/
+Disallow: /exports/
+Disallow: /generated/
+
+# 阻止索引开发和系统文件
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /.env
+Disallow: /*.log$
+
+# 阻止索引API端点（如果将来添加）
+Disallow: /api/
+
+# 阻止索引管理页面（如果有的话）
+Disallow: /admin/
+
+# Vercel特定路径保护
+Disallow: /_next/
+Disallow: /.vercel/
+
+# 提供站点地图以提高索引效率
+Sitemap: https://ai-resume-generator.vercel.app/sitemap.xml
+
+# 控制爬取频率
+Crawl-delay: 1 
