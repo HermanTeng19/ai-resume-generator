@@ -90,6 +90,58 @@ class I18n {
                 fileImported: '文件导入成功',
                 templateLoaded: '模板加载成功',
                 
+                // 导出和复制相关
+                htmlDownloaded: 'HTML文件已下载到本地',
+                htmlGenerationFailed: '无法生成HTML文件',
+                copySuccess: '复制成功',
+                copyFailed: '复制失败',
+                htmlCopyFailed: '无法复制HTML代码',
+                
+                // 打印相关
+                printPreparing: '准备打印',
+                printPreviewOpening: '正在打开打印预览...',
+                printFailed: '打印失败',
+                printPreviewFailed: '无法打开打印预览',
+                exportPdf: '导出PDF',
+                selectSaveAsPdf: '请在打印对话框中选择"另存为PDF"',
+                
+                // 文件导入相关
+                fileTypeError: '文件类型错误',
+                selectMdOrTxtFile: '请选择.md或.txt文件',
+                fileTooLarge: '文件过大',
+                fileSizeLimit: '文件大小不能超过5MB',
+                readFailed: '读取失败',
+                cannotReadFile: '无法读取文件内容',
+                importSuccess: '导入成功',
+                fileImportedPrefix: '已导入文件: ',
+                
+                // 模板和主题切换消息
+                templateUpdated: '模板已更新',
+                themeUpdated: '主题已更新',
+                templateSwitchedTo: '已切换到',
+                themeSwitchedTo: '已切换到',
+                templateSuffix: '模板',
+                themeSuffix: '主题',
+                themeToggled: '主题已切换',
+                darkModeEnabled: '已切换到暗色模式',
+                lightModeEnabled: '已切换到亮色模式',
+                contentCleared: '内容已清空',
+                editorContentCleared: '编辑器内容已清空',
+                saveSuccess: '保存成功',
+                resumeSavedLocally: '简历内容已保存到本地',
+                
+                // 模板名称
+                classicTemplateName: '经典',
+                modernTemplateName: '现代',
+                minimalTemplateName: '简约',
+                
+                // 主题名称
+                blueThemeName: '蓝色',
+                greenThemeName: '绿色',
+                purpleThemeName: '紫色',
+                redThemeName: '红色',
+                grayThemeName: '灰色',
+                
                 // 语言选择
                 language: '语言',
                 chinese: '中文',
@@ -210,6 +262,58 @@ class I18n {
                 htmlCopied: 'HTML code copied to clipboard',
                 fileImported: 'File imported successfully',
                 templateLoaded: 'Template loaded successfully',
+                
+                // Export and copy related
+                htmlDownloaded: 'HTML file downloaded successfully',
+                htmlGenerationFailed: 'Failed to generate HTML file',
+                copySuccess: 'Copy Successful',
+                copyFailed: 'Copy Failed',
+                htmlCopyFailed: 'Failed to copy HTML code',
+                
+                // Print related
+                printPreparing: 'Preparing to Print',
+                printPreviewOpening: 'Opening print preview...',
+                printFailed: 'Print Failed',
+                printPreviewFailed: 'Failed to open print preview',
+                exportPdf: 'Export PDF',
+                selectSaveAsPdf: 'Please select "Save as PDF" in the print dialog',
+                
+                // File import related
+                fileTypeError: 'File Type Error',
+                selectMdOrTxtFile: 'Please select .md or .txt files',
+                fileTooLarge: 'File Too Large',
+                fileSizeLimit: 'File size cannot exceed 5MB',
+                readFailed: 'Read Failed',
+                cannotReadFile: 'Cannot read file content',
+                importSuccess: 'Import Successful',
+                fileImportedPrefix: 'Imported file: ',
+                
+                // Template and theme switching messages
+                templateUpdated: 'Template updated',
+                themeUpdated: 'Theme updated',
+                templateSwitchedTo: 'Switched to',
+                themeSwitchedTo: 'Switched to',
+                templateSuffix: 'Template',
+                themeSuffix: 'Theme',
+                themeToggled: 'Theme switched',
+                darkModeEnabled: 'Switched to dark mode',
+                lightModeEnabled: 'Switched to light mode',
+                contentCleared: 'Content cleared',
+                editorContentCleared: 'Editor content cleared',
+                saveSuccess: 'Save successful',
+                resumeSavedLocally: 'Resume content saved locally',
+                
+                // Template names
+                classicTemplateName: 'Classic',
+                modernTemplateName: 'Modern',
+                minimalTemplateName: 'Minimal',
+                
+                // Theme names
+                blueThemeName: 'Blue',
+                greenThemeName: 'Green',
+                purpleThemeName: 'Purple',
+                redThemeName: 'Red',
+                grayThemeName: 'Gray',
                 
                 // Language selection
                 language: 'Language',

@@ -23,10 +23,14 @@ Object.assign(ResumeApp.prototype, {
             
             URL.revokeObjectURL(url);
             
-            this.showToast('success', '导出成功', 'HTML文件已下载到本地');
+            this.showToast('success', 
+                window.i18n ? window.i18n.t('exportSuccess') : '导出成功', 
+                window.i18n ? window.i18n.t('htmlDownloaded') : 'HTML文件已下载到本地');
         } catch (error) {
             console.error('导出HTML失败:', error);
-            this.showToast('error', '导出失败', '无法生成HTML文件');
+            this.showToast('error', 
+                window.i18n ? window.i18n.t('exportFailed') : '导出失败', 
+                window.i18n ? window.i18n.t('htmlGenerationFailed') : '无法生成HTML文件');
         }
     },
 
@@ -37,7 +41,9 @@ Object.assign(ResumeApp.prototype, {
         try {
             const htmlContent = this.generateCompleteHTML();
             await navigator.clipboard.writeText(htmlContent);
-            this.showToast('success', '复制成功', 'HTML代码已复制到剪贴板');
+            this.showToast('success', 
+                window.i18n ? window.i18n.t('copySuccess') : '复制成功', 
+                window.i18n ? window.i18n.t('htmlCopied') : 'HTML代码已复制到剪贴板');
         } catch (error) {
             console.error('复制HTML失败:', error);
             // 降级方案：使用传统方法复制
@@ -60,10 +66,14 @@ Object.assign(ResumeApp.prototype, {
             document.execCommand('copy');
             document.body.removeChild(textArea);
             
-            this.showToast('success', '复制成功', 'HTML代码已复制到剪贴板');
+            this.showToast('success', 
+                window.i18n ? window.i18n.t('copySuccess') : '复制成功', 
+                window.i18n ? window.i18n.t('htmlCopied') : 'HTML代码已复制到剪贴板');
         } catch (error) {
             console.error('降级复制也失败:', error);
-            this.showToast('error', '复制失败', '无法复制HTML代码');
+            this.showToast('error', 
+                window.i18n ? window.i18n.t('copyFailed') : '复制失败', 
+                window.i18n ? window.i18n.t('htmlCopyFailed') : '无法复制HTML代码');
         }
     },
 
@@ -86,10 +96,14 @@ Object.assign(ResumeApp.prototype, {
                 }, 500);
             };
             
-            this.showToast('info', '准备打印', '正在打开打印预览...');
+            this.showToast('info', 
+                window.i18n ? window.i18n.t('printPreparing') : '准备打印', 
+                window.i18n ? window.i18n.t('printPreviewOpening') : '正在打开打印预览...');
         } catch (error) {
             console.error('打印失败:', error);
-            this.showToast('error', '打印失败', '无法打开打印预览');
+            this.showToast('error', 
+                window.i18n ? window.i18n.t('printFailed') : '打印失败', 
+                window.i18n ? window.i18n.t('printPreviewFailed') : '无法打开打印预览');
         }
     },
 
@@ -587,7 +601,9 @@ body {
      * 导出PDF（使用浏览器打印功能）
      */
     exportPDF() {
-        this.showToast('info', '导出PDF', '请在打印对话框中选择"另存为PDF"');
+        this.showToast('info', 
+            window.i18n ? window.i18n.t('exportPdf') : '导出PDF', 
+            window.i18n ? window.i18n.t('selectSaveAsPdf') : '请在打印对话框中选择"另存为PDF"');
         setTimeout(() => {
             this.printResume();
         }, 1000);

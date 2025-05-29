@@ -270,7 +270,14 @@ class ResumeApp {
         
         this.updatePreview();
         this.saveToLocalStorage();
-        this.showToast('success', '模板已更新', `已切换到${this.getTemplateName(template)}模板`);
+        
+        // 使用国际化函数显示提示
+        const templateUpdated = window.i18n ? window.i18n.t('templateUpdated') : '模板已更新';
+        const templateSwitchedTo = window.i18n ? window.i18n.t('templateSwitchedTo') : '已切换到';
+        const templateName = this.getTemplateName(template);
+        const templateSuffix = window.i18n ? window.i18n.t('templateSuffix') : '模板';
+        
+        this.showToast('success', templateUpdated, `${templateSwitchedTo}${templateName}${templateSuffix}`);
     }
 
     /**
@@ -286,7 +293,14 @@ class ResumeApp {
         
         this.updatePreview();
         this.saveToLocalStorage();
-        this.showToast('success', '主题已更新', `已切换到${this.getThemeName(theme)}主题`);
+        
+        // 使用国际化函数显示提示
+        const themeUpdated = window.i18n ? window.i18n.t('themeUpdated') : '主题已更新';
+        const themeSwitchedTo = window.i18n ? window.i18n.t('themeSwitchedTo') : '已切换到';
+        const themeName = this.getThemeName(theme);
+        const themeSuffix = window.i18n ? window.i18n.t('themeSuffix') : '主题';
+        
+        this.showToast('success', themeUpdated, `${themeSwitchedTo}${themeName}${themeSuffix}`);
     }
 
     /**
@@ -370,7 +384,14 @@ class ResumeApp {
         icon.className = this.isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
         
         this.saveToLocalStorage();
-        this.showToast('info', '主题已切换', this.isDarkMode ? '已切换到暗色模式' : '已切换到亮色模式');
+        
+        // 使用国际化函数显示提示
+        const themeToggled = window.i18n ? window.i18n.t('themeToggled') : '主题已切换';
+        const modeMessage = this.isDarkMode 
+            ? (window.i18n ? window.i18n.t('darkModeEnabled') : '已切换到暗色模式')
+            : (window.i18n ? window.i18n.t('lightModeEnabled') : '已切换到亮色模式');
+        
+        this.showToast('info', themeToggled, modeMessage);
     }
 
     /**
@@ -461,7 +482,11 @@ class ResumeApp {
         localStorage.setItem('resumeApp', JSON.stringify(data));
         
         if (showToast) {
-            this.showToast('success', '保存成功', '简历内容已保存到本地');
+            // 使用国际化函数显示提示
+            const saveSuccess = window.i18n ? window.i18n.t('saveSuccess') : '保存成功';
+            const resumeSavedLocally = window.i18n ? window.i18n.t('resumeSavedLocally') : '简历内容已保存到本地';
+            
+            this.showToast('success', saveSuccess, resumeSavedLocally);
         }
     }
 
@@ -516,7 +541,12 @@ class ResumeApp {
             this.markdownInput.value = '';
             this.updatePreview();
             this.saveToLocalStorage();
-            this.showToast('info', '内容已清空', '编辑器内容已清空');
+            
+            // 使用国际化函数显示提示
+            const contentCleared = window.i18n ? window.i18n.t('contentCleared') : '内容已清空';
+            const editorContentCleared = window.i18n ? window.i18n.t('editorContentCleared') : '编辑器内容已清空';
+            
+            this.showToast('info', contentCleared, editorContentCleared);
         }
     }
 
@@ -536,6 +566,16 @@ class ResumeApp {
     }
 
     getTemplateName(template) {
+        if (window.i18n) {
+            const nameKeys = {
+                classic: 'classicTemplateName',
+                modern: 'modernTemplateName',
+                minimal: 'minimalTemplateName'
+            };
+            return window.i18n.t(nameKeys[template]) || template;
+        }
+        
+        // 降级处理
         const names = {
             classic: '经典',
             modern: '现代',
@@ -545,6 +585,18 @@ class ResumeApp {
     }
 
     getThemeName(theme) {
+        if (window.i18n) {
+            const nameKeys = {
+                blue: 'blueThemeName',
+                green: 'greenThemeName',
+                purple: 'purpleThemeName',
+                red: 'redThemeName',
+                gray: 'grayThemeName'
+            };
+            return window.i18n.t(nameKeys[theme]) || theme;
+        }
+        
+        // 降级处理
         const names = {
             blue: '蓝色',
             green: '绿色',

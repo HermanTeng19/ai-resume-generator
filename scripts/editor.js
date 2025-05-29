@@ -80,13 +80,17 @@ Object.assign(ResumeApp.prototype, {
         
         // 检查文件类型
         if (!this.isValidFileType(file)) {
-            this.showToast('error', '文件类型错误', '请选择.md或.txt文件');
+            this.showToast('error', 
+                window.i18n ? window.i18n.t('fileTypeError') : '文件类型错误', 
+                window.i18n ? window.i18n.t('selectMdOrTxtFile') : '请选择.md或.txt文件');
             return;
         }
 
         // 检查文件大小（限制为5MB）
         if (file.size > 5 * 1024 * 1024) {
-            this.showToast('error', '文件过大', '文件大小不能超过5MB');
+            this.showToast('error', 
+                window.i18n ? window.i18n.t('fileTooLarge') : '文件过大', 
+                window.i18n ? window.i18n.t('fileSizeLimit') : '文件大小不能超过5MB');
             return;
         }
 
@@ -116,7 +120,9 @@ Object.assign(ResumeApp.prototype, {
         };
 
         reader.onerror = () => {
-            this.showToast('error', '读取失败', '无法读取文件内容');
+            this.showToast('error', 
+                window.i18n ? window.i18n.t('readFailed') : '读取失败', 
+                window.i18n ? window.i18n.t('cannotReadFile') : '无法读取文件内容');
         };
 
         reader.readAsText(file, 'UTF-8');
@@ -142,7 +148,9 @@ Object.assign(ResumeApp.prototype, {
         this.closeModal();
         
         // 显示成功提示
-        this.showToast('success', '导入成功', `已导入文件: ${fileName}`);
+        const importSuccessTitle = window.i18n ? window.i18n.t('importSuccess') : '导入成功';
+        const fileImportedPrefix = window.i18n ? window.i18n.t('fileImportedPrefix') : '已导入文件: ';
+        this.showToast('success', importSuccessTitle, `${fileImportedPrefix}${fileName}`);
         
         // 重置文件输入
         this.fileInput.value = '';
