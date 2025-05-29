@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI简历生成器 | 专业简历在线制作工具</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AI简历生成器 - 免费在线专业简历制作工具，支持Markdown编辑，多种精美模板，实时预览，一键导出HTML/PDF。让你的求职之路更加顺畅！">
+    <meta name="keywords" content="简历生成器,在线简历制作,AI简历,Markdown简历,简历模板,求职工具,专业简历">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI简历生成器 | 专业简历在线制作工具">
+    <meta property="og:description" content="免费在线专业简历制作工具，支持多种模板，实时预览，一键导出">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <style>
+        :root {
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-200: #bfdbfe;
+            --primary-300: #93c5fd;
+            --primary-400: #60a5fa;
+            --primary-500: #3b82f6;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --primary-800: #1e40af;
+            --primary-900: #1e3a8a;
+            
+            --success-500: #10b981;
+            --warning-500: #f59e0b;
+            --error-500: #ef4444;
+            
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-display: 'Playfair Display', Georgia, serif;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-500) 100%);
+            --gradient-hero: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 50%, var(--primary-800) 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--gray-50);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-600);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-600);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary-600);
+            border: 2px solid var(--primary-600);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-600);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            opacity: 0.1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-100);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+        
+        /* Demo Section */
+        .demo-section {
+            padding: 5rem 0;
+            background: var(--gray-50);
+        }
+        
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .demo-editor, .demo-preview {
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+        
+        .demo-header {
+            background: var(--gray-100);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .demo-tabs {
+            display: flex;
+            align-items: center;
+        }
+        
+        .demo-tab {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-500);
+            color: white;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .demo-content {
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .demo-code {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 1.5rem;
+            font-family: var(--font-mono, 'Courier New', monospace);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--gray-700);
+            background: var(--gray-50);
+            border: none;
+            resize: none;
+            outline: none;
+            overflow-y: auto;
+        }
+        
+        .demo-resume {
+            padding: 2rem;
+            height: 100%;
+            overflow-y: auto;
+            background: white;
+        }
+        
+        .demo-resume-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-500);
+        }
+        
+        .demo-resume-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-600);
+        }
+        
+        .demo-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .demo-section h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .demo-contact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+        }
+        
+        .demo-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray-700);
+        }
+        
+        .demo-contact-item i {
+            color: var(--primary-500);
+            width: 16px;
+        }
+        
+        .demo-section p {
+            color: var(--gray-700);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+        
+        .demo-experience h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.25rem;
+        }
+        
+        .demo-date {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            font-style: italic;
+            margin-bottom: 0.75rem;
+        }
+        
+        .demo-experience ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+        
+        .demo-experience li {
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Templates Section */
+        .templates {
+            padding: 5rem 0;
+            background: var(--gray-50);
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .template-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .template-preview {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-200) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-600);
+            font-size: 3rem;
+        }
+        
+        .template-info {
+            padding: 1.5rem;
+        }
+        
+        .template-info h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .template-info p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+            background: var(--primary-600);
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        /* How it works */
+        .how-it-works {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .step-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .step-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+        }
+        
+        .step-card p {
+            color: var(--gray-600);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 0;
+            background: var(--gradient-hero);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: var(--gray-300);
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--primary-400);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--gray-700);
+            padding-top: 1rem;
+            text-align: center;
+            color: var(--gray-400);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-container {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+            
+            .demo-editor, .demo-preview {
+                height: 400px;
+            }
+            
+            .demo-code {
+                font-size: 0.8rem;
+                padding: 1rem;
+            }
+            
+            .demo-resume {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-animate.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <i class="fas fa-file-alt"></i>
+                    <span>AI简历生成器</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features">功能特性</a></li>
+                    <li><a href="#templates">简历模板</a></li>
+                    <li><a href="#how-it-works">使用指南</a></li>
+                    <li><a href="landing-en.html"><i class="fas fa-globe"></i> English</a></li>
+                </ul>
+                <a href="index.html" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    开始制作
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content animate-fade-in-up">
+                <h1>打造专业简历<br>让求职更简单</h1>
+                <p>AI驱动的智能简历生成器，支持Markdown编辑，提供多种精美模板，实时预览效果，一键导出专业简历</p>
+                <div class="hero-buttons">
+                    <a href="index.html" class="btn btn-primary btn-hero">
+                        <i class="fas fa-rocket"></i>
+                        立即开始制作
+                    </a>
+                    <a href="#features" class="btn btn-secondary btn-hero">
+                        <i class="fas fa-play"></i>
+                        了解更多
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <h2 class="section-title">实时效果预览</h2>
+                <p class="section-subtitle">体验强大的Markdown编辑器和实时预览功能</p>
+            </div>
+            <div class="demo-container scroll-animate">
+                <div class="demo-editor">
+                    <div class="demo-header">
+                        <div class="demo-tabs">
+                            <div class="demo-tab active">
+                                <i class="fab fa-markdown"></i>
+                                <span>Markdown编辑</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-content">
+                        <pre class="demo-code">
+# 张三
+**高级前端工程师**
+
+## 联系方式
+- 📧 zhangsan@email.com
+- 📱 138-0000-0000
+- 🏠 北京市海淀区
+- 💼 linkedin.com/in/zhangsan
+
+## 个人简介
+5年前端开发经验，精通React、Vue等
+现代前端框架，具备丰富的项目经验...
+
+## 工作经验
+### 前端工程师 | 某互联网公司
+*2021.03 - 至今*
+
+- 负责公司核心产品前端开发
+- 优化页面性能，提升用户体验
+- 参与技术选型和架构设计</pre>
+                    </div>
+                </div>
+                <div class="demo-preview">
+                    <div class="demo-header">
+                        <div class="demo-tabs">
+                            <div class="demo-tab active">
+                                <i class="fas fa-eye"></i>
+                                <span>实时预览</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-content">
+                        <div class="demo-resume">
+                            <div class="demo-resume-header">
+                                <h1>张三</h1>
+                                <div class="demo-title">高级前端工程师</div>
+                            </div>
+                            <div class="demo-section">
+                                <h2>联系方式</h2>
+                                <div class="demo-contact">
+                                    <div class="demo-contact-item">
+                                        <i class="fas fa-envelope"></i>
+                                        zhangsan@email.com
+                                    </div>
+                                    <div class="demo-contact-item">
+                                        <i class="fas fa-phone"></i>
+                                        138-0000-0000
+                                    </div>
+                                    <div class="demo-contact-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        北京市海淀区
+                                    </div>
+                                    <div class="demo-contact-item">
+                                        <i class="fab fa-linkedin"></i>
+                                        linkedin.com/in/zhangsan
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="demo-section">
+                                <h2>个人简介</h2>
+                                <p>5年前端开发经验，精通React、Vue等现代前端框架，具备丰富的项目经验...</p>
+                            </div>
+                            <div class="demo-section">
+                                <h2>工作经验</h2>
+                                <div class="demo-experience">
+                                    <h3>前端工程师 | 某互联网公司</h3>
+                                    <div class="demo-date">2021.03 - 至今</div>
+                                    <ul>
+                                        <li>负责公司核心产品前端开发</li>
+                                        <li>优化页面性能，提升用户体验</li>
+                                        <li>参与技术选型和架构设计</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <h2 class="section-title">强大功能特性</h2>
+                <p class="section-subtitle">我们提供最先进的简历制作工具，让您的求职之路更加顺畅</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <i class="fab fa-markdown"></i>
+                    </div>
+                    <h3>Markdown编辑器</h3>
+                    <p>支持Markdown语法的强大编辑器，让您专注于内容创作，无需担心格式问题。实时预览，所见即所得。</p>
+                </div>
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>多种精美模板</h3>
+                    <p>提供经典、现代、简约等多种专业设计模板，支持自定义颜色主题，让您的简历脱颖而出。</p>
+                </div>
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>实时预览</h3>
+                    <p>左侧编辑，右侧实时预览，支持滚动同步，让您随时查看简历效果，及时调整内容布局。</p>
+                </div>
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>一键导出</h3>
+                    <p>支持导出为HTML、PDF格式，打印优化设计，确保在任何设备上都能完美展示您的专业形象。</p>
+                </div>
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>响应式设计</h3>
+                    <p>完美适配桌面、平板、手机等各种设备，随时随地编辑和查看您的简历，不受设备限制。</p>
+                </div>
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-save"></i>
+                    </div>
+                    <h3>自动保存</h3>
+                    <p>智能本地存储功能，自动保存您的编辑内容，防止意外丢失，让您的工作成果得到充分保护。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item scroll-animate">
+                    <h3>10,000+</h3>
+                    <p>用户信赖</p>
+                </div>
+                <div class="stat-item scroll-animate">
+                    <h3>50,000+</h3>
+                    <p>简历生成</p>
+                </div>
+                <div class="stat-item scroll-animate">
+                    <h3>98%</h3>
+                    <p>用户满意度</p>
+                </div>
+                <div class="stat-item scroll-animate">
+                    <h3>24/7</h3>
+                    <p>随时可用</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section id="templates" class="templates">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <h2 class="section-title">专业简历模板</h2>
+                <p class="section-subtitle">精心设计的多种模板风格，满足不同行业和职位需求</p>
+            </div>
+            <div class="templates-grid">
+                <div class="template-card scroll-animate">
+                    <div class="template-preview">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="template-info">
+                        <h3>经典模板</h3>
+                        <p>适合传统行业，简洁大方的设计风格，突出专业性和可读性。</p>
+                    </div>
+                </div>
+                <div class="template-card scroll-animate">
+                    <div class="template-preview">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="template-info">
+                        <h3>现代模板</h3>
+                        <p>适合科技和创新行业，时尚现代的设计语言，展现您的创新思维。</p>
+                    </div>
+                </div>
+                <div class="template-card scroll-animate">
+                    <div class="template-preview">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <div class="template-info">
+                        <h3>简约模板</h3>
+                        <p>极简主义设计理念，突出内容本身，适合注重简洁高效的职位。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <h2 class="section-title">使用步骤</h2>
+                <p class="section-subtitle">三个简单步骤，快速制作专业简历</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card scroll-animate">
+                    <div class="step-number">1</div>
+                    <h3>编辑内容</h3>
+                    <p>使用Markdown语法编辑您的简历内容，或导入现有的简历文件</p>
+                </div>
+                <div class="step-card scroll-animate">
+                    <div class="step-number">2</div>
+                    <h3>选择模板</h3>
+                    <p>从多种专业模板中选择最适合您的设计风格和颜色主题</p>
+                </div>
+                <div class="step-card scroll-animate">
+                    <div class="step-number">3</div>
+                    <h3>导出简历</h3>
+                    <p>一键导出为HTML或PDF格式，即可用于求职申请或打印</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container scroll-animate">
+            <h2>准备好制作您的专业简历了吗？</h2>
+            <p>加入成千上万的求职者，使用我们的AI简历生成器，让您的职业生涯更上一层楼</p>
+            <a href="index.html" class="btn btn-secondary btn-hero">
+                <i class="fas fa-rocket"></i>
+                立即开始制作
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>产品</h3>
+                    <ul>
+                        <li><a href="index.html">简历生成器</a></li>
+                        <li><a href="#templates">简历模板</a></li>
+                        <li><a href="#features">功能特性</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>帮助</h3>
+                    <ul>
+                        <li><a href="QUICK_START.md">使用指南</a></li>
+                        <li><a href="example-resume.md">示例简历</a></li>
+                        <li><a href="README.md">常见问题</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>关于</h3>
+                    <ul>
+                        <li><a href="PROJECT_SUMMARY.md">关于我们</a></li>
+                        <li><a href="LICENSE">开源许可</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系方式</h3>
+                    <ul>
+                        <li><a href="mailto:support@ai-resume.com">邮箱支持</a></li>
+                        <li><a href="https://github.com">GitHub</a></li>
+                        <li><a href="#">反馈建议</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AI简历生成器. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.feature-card, .template-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html> 
