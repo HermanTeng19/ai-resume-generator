@@ -1,26 +1,29 @@
-# AI简历生成器
+# AI简历生成器 | AI Resume Generator
 
-一个轻量级的Markdown简历转换工具，支持实时预览、样式定制和静态导出功能。无需后端依赖，可直接在浏览器中完成所有操作。
+一个轻量级的Markdown简历转换工具，支持实时预览、样式定制和静态导出功能。无需后端依赖，可直接在浏览器中完成所有操作。现已支持中英文双语界面，并针对国际用户进行了全面优化。
+
+🌐 **在线体验**: [https://ai-resume-generator.vercel.app](https://ai-resume-generator.vercel.app)
 
 ## ✨ 功能特性
 
 ### 📝 编辑器功能
-- **Markdown实时预览** - 左侧编辑，右侧实时预览
+- **Markdown实时预览** - 左侧编辑，右侧实时预览，支持滚动同步
 - **文件导入支持** - 支持拖拽上传.md和.txt文件
 - **模板快速加载** - 内置多种专业简历模板
-- **撤销重做** - 完整的编辑历史管理
+- **撤销重做** - 完整的编辑历史管理（50步历史）
 - **本地存储** - 自动保存，防止数据丢失
+- **智能图标识别** - 自动为联系信息添加相应图标
 
 ### 🎨 样式定制
 - **多种模板** - 经典、现代、简约三种设计风格
 - **主题颜色** - 蓝色、绿色、紫色、红色、灰色主题
 - **多语言支持** - 中英文界面切换，国际化体验
 - **字体调节** - 可调整字体大小、行高、页面边距
-- **明暗主题** - 支持明暗模式切换
+- **明暗主题** - 支持明暗模式切换，预览面板深色模式优化
 - **响应式设计** - 适配桌面和移动设备
 
 ### 📤 导出功能
-- **HTML导出** - 生成独立的HTML文件
+- **HTML导出** - 生成独立的HTML文件，保持专业白色背景
 - **打印优化** - 专门优化的打印样式
 - **PDF导出** - 通过浏览器打印功能生成PDF
 - **代码复制** - 一键复制HTML代码
@@ -32,21 +35,34 @@
 - **缩放控制** - 50%-200%预览缩放
 - **布局切换** - 水平/垂直布局切换
 - **工具提示** - 详细的操作指导
+- **滚动同步** - 编辑器与预览面板双向滚动同步
+
+### 🌐 国际化支持
+- **双语界面** - 完整的中英文界面切换
+- **国际化SEO** - 针对全球用户的搜索引擎优化
+- **多语言文档** - 完整的中英文项目文档
+- **PWA支持** - 可安装到设备，支持离线使用
+- **社交分享优化** - 针对国际社交媒体平台优化
 
 ## 🚀 快速开始
 
-### 方法一：直接使用（强烈推荐）
+### 🌐 在线使用（推荐）
+直接访问：[https://ai-resume-generator.vercel.app](https://ai-resume-generator.vercel.app)
+
+### 💻 本地使用
+
+#### 方法一：直接使用
 1. 下载项目文件到本地
 2. 双击打开 `index.html` 文件
 3. 开始编辑您的简历！
 
-### 方法二：使用启动脚本
+#### 方法二：使用启动脚本
 ```bash
 ./start.sh
 ```
 脚本会自动在默认浏览器中打开应用。
 
-### 方法三：Node.js本地服务器（可选）
+#### 方法三：Node.js本地服务器
 如果您已安装Node.js，可以使用以下命令：
 ```bash
 # 使用http-server
@@ -54,6 +70,9 @@ npm start
 
 # 或使用live-server（支持热重载）
 npm run dev
+
+# 预览模式
+npm run preview
 ```
 
 ### 使用步骤
@@ -87,6 +106,8 @@ npm run dev
 - 📧 Email: your.email@example.com
 - 📱 电话: +86 138-0000-0000
 - 🏠 地址: 您的城市
+- 💼 LinkedIn: linkedin.com/in/yourprofile
+- 🐙 GitHub: github.com/yourusername
 
 ## 个人简介
 简洁的个人介绍...
@@ -135,6 +156,10 @@ npm run dev
 ai-resume-generator/
 ├── index.html              # 主页面
 ├── package.json           # Node.js配置文件
+├── vercel.json            # Vercel部署配置
+├── site.webmanifest       # PWA清单文件
+├── robots.txt             # SEO机器人文件
+├── sitemap.xml            # 网站地图
 ├── start.sh              # 启动脚本
 ├── styles/               # 样式文件
 │   ├── main.css         # 主样式
@@ -148,6 +173,7 @@ ai-resume-generator/
 │   └── ui-utils.js     # UI工具
 ├── example-resume.md    # 中文示例简历
 ├── example-resume-en.md # 英文示例简历
+├── DEPLOYMENT.md       # 部署指南
 ├── QUICK_START.md      # 快速开始指南
 └── README.md           # 项目说明
 ```
@@ -158,6 +184,7 @@ ai-resume-generator/
 - **无障碍访问** - 支持键盘导航和屏幕阅读器
 - **性能优化** - 懒加载和防抖处理
 - **用户体验** - 直观的界面和流畅的交互
+- **国际化** - 多语言支持和文化适配
 
 ## 🎨 设计规范
 
@@ -176,6 +203,28 @@ ai-resume-generator/
 - 从4px到40px的标准间距值
 - 保持视觉层次的一致性
 
+## 🌐 部署指南
+
+### Vercel部署（推荐）
+项目已完全配置好Vercel部署：
+
+1. **GitHub集成部署**
+   - Fork本项目到您的GitHub
+   - 在Vercel Dashboard中导入仓库
+   - 自动部署，支持持续集成
+
+2. **本地部署准备**
+   - 已配置`vercel.json`
+   - 已优化SEO和PWA支持
+   - 已添加安全头和缓存策略
+
+详细部署指南请参考：[DEPLOYMENT.md](DEPLOYMENT.md)
+
+### 其他部署方式
+- **GitHub Pages** - 静态站点托管
+- **Netlify** - 现代化部署平台
+- **自建服务器** - 任何支持静态文件的服务器
+
 ## 🔧 自定义开发
 
 ### 添加新模板
@@ -192,6 +241,11 @@ ai-resume-generator/
 1. 在 `scripts/export.js` 中添加新的导出方法
 2. 更新UI界面添加新按钮
 3. 绑定相应的事件处理
+
+### 国际化扩展
+1. 在 `scripts/i18n.js` 中添加新语言
+2. 更新HTML中的多语言标签
+3. 添加相应的语言切换逻辑
 
 ## 📱 浏览器兼容性
 
@@ -220,6 +274,7 @@ ai-resume-generator/
 - [Marked.js](https://marked.js.org/) - Markdown解析器
 - [FontAwesome](https://fontawesome.com/) - 图标库
 - [Google Fonts](https://fonts.google.com/) - 字体服务
+- [Vercel](https://vercel.com/) - 部署平台
 
 ## 🌍 多语言文档
 
@@ -230,6 +285,7 @@ ai-resume-generator/
 - [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - 项目总结
 - [QUICK_START.md](QUICK_START.md) - 快速开始
 - [STARTUP_GUIDE.md](STARTUP_GUIDE.md) - 启动指南
+- [DEPLOYMENT.md](DEPLOYMENT.md) - 部署指南
 
 ### English Documentation
 - [README_EN.md](README_EN.md) - Project Documentation
@@ -240,10 +296,23 @@ ai-resume-generator/
 ## 📞 联系方式
 
 如有问题或建议，请通过以下方式联系：
-- 提交Issue
-- 发送邮件
-- 社交媒体
+- 提交Issue到GitHub仓库
+- 发送邮件反馈
+- 社交媒体联系
+
+## 🌟 特色亮点
+
+- ✅ **零依赖部署** - 无需后端，直接使用
+- ✅ **完全离线** - 下载后可脱离网络使用
+- ✅ **国际化支持** - 中英文双语界面
+- ✅ **PWA支持** - 可安装到设备
+- ✅ **SEO优化** - 针对搜索引擎优化
+- ✅ **响应式设计** - 完美适配各种设备
+- ✅ **实时预览** - 所见即所得编辑体验
+- ✅ **专业模板** - 精心设计的简历模板
+- ✅ **高性能** - 优化的代码和流畅体验
+- ✅ **开源免费** - MIT许可证，完全开源
 
 ---
 
-**AI简历生成器** - 让简历制作变得简单高效 ✨ 
+**AI简历生成器** - 让简历制作变得简单高效，助力您的职业发展 ✨ 

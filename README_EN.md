@@ -1,26 +1,29 @@
-# AI Resume Generator
+# AI Resume Generator | AI简历生成器
 
-A lightweight Markdown resume conversion tool that supports real-time preview, style customization, and static export functionality. No backend dependencies required - complete all operations directly in the browser.
+A lightweight Markdown resume conversion tool that supports real-time preview, style customization, and static export functionality. No backend dependencies required - complete all operations directly in the browser. Now featuring full bilingual support and comprehensive optimization for international users.
+
+🌐 **Live Demo**: [https://ai-resume-generator.vercel.app](https://ai-resume-generator.vercel.app)
 
 ## ✨ Features
 
 ### 📝 Editor Functions
-- **Real-time Markdown Preview** - Edit on the left, preview on the right
+- **Real-time Markdown Preview** - Edit on the left, preview on the right with scroll synchronization
 - **File Import Support** - Drag and drop .md and .txt files
 - **Quick Template Loading** - Built-in professional resume templates
-- **Undo/Redo** - Complete editing history management
+- **Undo/Redo** - Complete editing history management (50-step history)
 - **Local Storage** - Auto-save to prevent data loss
+- **Smart Icon Recognition** - Automatically adds icons for contact information
 
 ### 🎨 Style Customization
 - **Multiple Templates** - Classic, Modern, Minimal design styles
 - **Theme Colors** - Blue, Green, Purple, Red, Gray themes
-- **Multi-language Support** - Chinese/English interface switching
+- **Multi-language Support** - Chinese/English interface switching with internationalization
 - **Font Adjustment** - Adjustable font size, line height, page margins
-- **Dark/Light Theme** - Support for theme switching
+- **Dark/Light Theme** - Support for theme switching with optimized dark mode preview
 - **Responsive Design** - Compatible with desktop and mobile devices
 
 ### 📤 Export Functions
-- **HTML Export** - Generate standalone HTML files
+- **HTML Export** - Generate standalone HTML files with professional white background
 - **Print Optimization** - Specially optimized print styles
 - **PDF Export** - Generate PDF via browser print function
 - **Code Copy** - One-click HTML code copying
@@ -32,21 +35,34 @@ A lightweight Markdown resume conversion tool that supports real-time preview, s
 - **Zoom Control** - 50%-200% preview scaling
 - **Layout Toggle** - Horizontal/Vertical layout switching
 - **Tooltips** - Detailed operation guidance
+- **Scroll Synchronization** - Bidirectional scroll sync between editor and preview
+
+### 🌐 Internationalization Support
+- **Bilingual Interface** - Complete Chinese/English interface switching
+- **International SEO** - Search engine optimization for global users
+- **Multi-language Documentation** - Complete bilingual project documentation
+- **PWA Support** - Installable to devices with offline support
+- **Social Sharing Optimization** - Optimized for international social media platforms
 
 ## 🚀 Quick Start
 
-### Method 1: Direct Use (Highly Recommended)
+### 🌐 Online Use (Recommended)
+Visit directly: [https://ai-resume-generator.vercel.app](https://ai-resume-generator.vercel.app)
+
+### 💻 Local Use
+
+#### Method 1: Direct Use
 1. Download project files to local machine
 2. Double-click to open `index.html` file
 3. Start editing your resume!
 
-### Method 2: Using Startup Script
+#### Method 2: Using Startup Script
 ```bash
 ./start.sh
 ```
 The script will automatically open the application in your default browser.
 
-### Method 3: Node.js Local Server (Optional)
+#### Method 3: Node.js Local Server
 If you have Node.js installed, you can use the following commands:
 ```bash
 # Using http-server
@@ -54,6 +70,9 @@ npm start
 
 # Or using live-server (with hot reload)
 npm run dev
+
+# Preview mode
+npm run preview
 ```
 
 ### Usage Steps
@@ -87,6 +106,8 @@ Suitable for team leaders and project managers, highlighting management experien
 - 📧 Email: your.email@example.com
 - 📱 Phone: +1 (555) 123-4567
 - 🏠 Address: Your City
+- 💼 LinkedIn: linkedin.com/in/yourprofile
+- 🐙 GitHub: github.com/yourusername
 
 ## Personal Summary
 Brief personal introduction...
@@ -135,6 +156,10 @@ The system automatically recognizes the following formats and adds corresponding
 ai-resume-generator/
 ├── index.html              # Main page
 ├── package.json           # Node.js configuration
+├── vercel.json            # Vercel deployment config
+├── site.webmanifest       # PWA manifest file
+├── robots.txt             # SEO robots file
+├── sitemap.xml            # Website sitemap
 ├── start.sh              # Startup script
 ├── styles/               # Style files
 │   ├── main.css         # Main styles
@@ -148,6 +173,7 @@ ai-resume-generator/
 │   └── ui-utils.js     # UI utilities
 ├── example-resume.md    # Chinese example resume
 ├── example-resume-en.md # English example resume
+├── DEPLOYMENT.md       # Deployment guide
 ├── QUICK_START.md      # Quick start guide
 └── README.md           # Project documentation
 ```
@@ -158,6 +184,7 @@ ai-resume-generator/
 - **Accessibility** - Support for keyboard navigation and screen readers
 - **Performance Optimization** - Lazy loading and debounce handling
 - **User Experience** - Intuitive interface and smooth interactions
+- **Internationalization** - Multi-language support and cultural adaptation
 
 ## 🎨 Design Specifications
 
@@ -176,6 +203,28 @@ ai-resume-generator/
 - Standard spacing values from 4px to 40px
 - Consistent visual hierarchy
 
+## 🌐 Deployment Guide
+
+### Vercel Deployment (Recommended)
+The project is fully configured for Vercel deployment:
+
+1. **GitHub Integration Deployment**
+   - Fork this project to your GitHub
+   - Import repository in Vercel Dashboard
+   - Automatic deployment with continuous integration
+
+2. **Local Deployment Preparation**
+   - Pre-configured `vercel.json`
+   - Optimized SEO and PWA support
+   - Added security headers and caching strategies
+
+For detailed deployment guide, see: [DEPLOYMENT.md](DEPLOYMENT.md)
+
+### Other Deployment Options
+- **GitHub Pages** - Static site hosting
+- **Netlify** - Modern deployment platform
+- **Self-hosted Server** - Any server supporting static files
+
 ## 🔧 Custom Development
 
 ### Adding New Templates
@@ -192,6 +241,11 @@ ai-resume-generator/
 1. Add new export methods in `scripts/export.js`
 2. Update UI to add new buttons
 3. Bind corresponding event handlers
+
+### Internationalization Extension
+1. Add new languages in `scripts/i18n.js`
+2. Update multi-language tags in HTML
+3. Add corresponding language switching logic
 
 ## 📱 Browser Compatibility
 
@@ -220,6 +274,7 @@ Thanks to the following open source projects for their support:
 - [Marked.js](https://marked.js.org/) - Markdown parser
 - [FontAwesome](https://fontawesome.com/) - Icon library
 - [Google Fonts](https://fonts.google.com/) - Font service
+- [Vercel](https://vercel.com/) - Deployment platform
 
 ## 🌍 Multi-language Documentation
 
@@ -230,6 +285,7 @@ This project provides bilingual documentation in Chinese and English:
 - [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - 项目总结
 - [QUICK_START.md](QUICK_START.md) - 快速开始
 - [STARTUP_GUIDE.md](STARTUP_GUIDE.md) - 启动指南
+- [DEPLOYMENT.md](DEPLOYMENT.md) - 部署指南
 
 ### English Documentation
 - [README_EN.md](README_EN.md) - Project Documentation
@@ -240,10 +296,23 @@ This project provides bilingual documentation in Chinese and English:
 ## 📞 Contact
 
 If you have questions or suggestions, please contact us through:
-- Submit an Issue
-- Send an email
-- Social media
+- Submit an Issue to GitHub repository
+- Send feedback email
+- Social media contact
+
+## 🌟 Key Highlights
+
+- ✅ **Zero-dependency Deployment** - No backend required, direct use
+- ✅ **Completely Offline** - Can be used offline after download
+- ✅ **International Support** - Bilingual Chinese/English interface
+- ✅ **PWA Support** - Installable to devices
+- ✅ **SEO Optimized** - Search engine optimized
+- ✅ **Responsive Design** - Perfect adaptation to all devices
+- ✅ **Real-time Preview** - WYSIWYG editing experience
+- ✅ **Professional Templates** - Carefully designed resume templates
+- ✅ **High Performance** - Optimized code and smooth experience
+- ✅ **Open Source & Free** - MIT license, completely open source
 
 ---
 
-**AI Resume Generator** - Making resume creation simple and efficient ✨ 
+**AI Resume Generator** - Making resume creation simple and efficient, empowering your career development ✨ 
