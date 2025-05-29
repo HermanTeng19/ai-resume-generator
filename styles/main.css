@@ -105,6 +105,42 @@
   --border-hover: var(--gray-500);
 }
 
+/* Dark mode preview adjustments */
+[data-theme="dark"] .preview-content {
+  background: var(--gray-800);
+  color: var(--gray-100);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode text adjustments for resume content */
+[data-theme="dark"] .resume-content {
+  background: var(--gray-800);
+  color: var(--gray-100);
+}
+
+/* Dark mode text adjustments for resume content */
+[data-theme="dark"] .resume-content h1,
+[data-theme="dark"] .resume-content h2,
+[data-theme="dark"] .resume-content h3,
+[data-theme="dark"] .resume-content h4,
+[data-theme="dark"] .resume-content h5,
+[data-theme="dark"] .resume-content h6 {
+  color: var(--gray-100);
+}
+
+[data-theme="dark"] .resume-content p,
+[data-theme="dark"] .resume-content li {
+  color: var(--gray-200);
+}
+
+[data-theme="dark"] .resume-content a {
+  color: var(--primary-400);
+}
+
+[data-theme="dark"] .resume-content a:hover {
+  color: var(--primary-300);
+}
+
 /* ===== 基础重置 ===== */
 *,
 *::before,

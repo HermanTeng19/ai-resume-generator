@@ -657,4 +657,163 @@
   .timeline-item {
     break-inside: avoid;
   }
+}
+
+/* ===== Dark Mode 简历模板调整 ===== */
+[data-theme="dark"] .resume-content {
+  background: var(--gray-800);
+  color: var(--gray-100);
+}
+
+/* Dark mode - 经典模板调整 */
+[data-theme="dark"] .resume-template-classic h1 {
+  color: var(--primary-400);
+  border-bottom-color: var(--gray-600);
+}
+
+[data-theme="dark"] .resume-template-classic h2 {
+  color: var(--primary-400);
+  border-bottom-color: var(--gray-600);
+}
+
+[data-theme="dark"] .resume-template-classic h2::before {
+  background: var(--primary-400);
+}
+
+[data-theme="dark"] .resume-template-classic .contact-item i {
+  color: var(--primary-400);
+}
+
+[data-theme="dark"] .resume-template-classic .experience-item,
+[data-theme="dark"] .resume-template-classic .project-item {
+  border-left-color: var(--gray-600);
+}
+
+[data-theme="dark"] .resume-template-classic .experience-item::before,
+[data-theme="dark"] .resume-template-classic .project-item::before {
+  background: var(--primary-400);
+}
+
+[data-theme="dark"] .resume-template-classic .company {
+  color: var(--primary-400);
+}
+
+[data-theme="dark"] .resume-template-classic .date {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .resume-template-classic .skill-tag {
+  background: var(--gray-700);
+  color: var(--primary-300);
+}
+
+/* Dark mode - 现代模板调整 */
+[data-theme="dark"] .resume-template-modern {
+  background: var(--gray-800);
+}
+
+[data-theme="dark"] .resume-template-modern h1 {
+  color: var(--gray-100);
+}
+
+[data-theme="dark"] .resume-template-modern .subtitle {
+  color: var(--primary-400);
+}
+
+[data-theme="dark"] .resume-template-modern h2 {
+  color: var(--gray-100);
+}
+
+[data-theme="dark"] .resume-template-modern h2::before {
+  background: linear-gradient(to bottom, var(--primary-400), var(--primary-500));
+}
+
+[data-theme="dark"] .resume-template-modern .section-card {
+  background: var(--gray-700);
+  border-color: var(--gray-600);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .resume-template-modern .header-card {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+}
+
+[data-theme="dark"] .resume-template-modern .contact-item {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .resume-template-modern .skill-bar {
+  background: var(--gray-600);
+}
+
+[data-theme="dark"] .resume-template-modern .timeline::before {
+  background: linear-gradient(to bottom, var(--primary-400), var(--primary-500));
+}
+
+[data-theme="dark"] .resume-template-modern .timeline-item {
+  background: var(--gray-700);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .resume-template-modern .timeline-item::before {
+  background: var(--primary-400);
+  box-shadow: 0 0 0 2px var(--primary-400);
+}
+
+/* Dark mode - 简约模板调整 */
+[data-theme="dark"] .resume-template-minimal h1 {
+  color: var(--gray-100);
+}
+
+[data-theme="dark"] .resume-template-minimal .subtitle {
+  color: var(--gray-300);
+}
+
+[data-theme="dark"] .resume-template-minimal h2 {
+  color: var(--gray-100);
+  border-bottom-color: var(--gray-600);
+}
+
+[data-theme="dark"] .resume-template-minimal h3 {
+  color: var(--gray-200);
+}
+
+[data-theme="dark"] .resume-template-minimal h4 {
+  color: var(--gray-300);
+}
+
+[data-theme="dark"] .resume-template-minimal .contact-info {
+  border-bottom-color: var(--gray-600);
+}
+
+[data-theme="dark"] .resume-template-minimal .contact-item {
+  color: var(--gray-300);
+}
+
+[data-theme="dark"] .resume-template-minimal .contact-item:not(:last-child)::after {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .resume-template-minimal li::before {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .resume-template-minimal .job-title {
+  color: var(--gray-100);
+}
+
+[data-theme="dark"] .resume-template-minimal .company {
+  color: var(--gray-200);
+}
+
+[data-theme="dark"] .resume-template-minimal .date {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .resume-template-minimal .skill-category h4 {
+  color: var(--gray-200);
+}
+
+[data-theme="dark"] .resume-template-minimal .skill-list {
+  color: var(--gray-300);
 } 
