@@ -52,6 +52,8 @@ class I18n {
                 normalMargin: '标准边距',
                 narrowMargin: '窄边距',
                 wideMargin: '宽边距',
+                scrollSync: '滚动同步',
+                scrollSyncHelp: '编辑器和预览面板滚动位置同步',
                 
                 // 导入模态框
                 importMarkdown: '导入Markdown文件',
@@ -129,6 +131,8 @@ class I18n {
                 editorContentCleared: '编辑器内容已清空',
                 saveSuccess: '保存成功',
                 resumeSavedLocally: '简历内容已保存到本地',
+                scrollSyncEnabled: '滚动同步已开启',
+                scrollSyncDisabled: '滚动同步已关闭',
                 
                 // 模板名称
                 classicTemplateName: '经典',
@@ -225,6 +229,8 @@ class I18n {
                 normalMargin: 'Normal Margin',
                 narrowMargin: 'Narrow Margin',
                 wideMargin: 'Wide Margin',
+                scrollSync: 'Scroll Sync',
+                scrollSyncHelp: 'Sync editor and preview panel scroll positions',
                 
                 // Import modal
                 importMarkdown: 'Import Markdown File',
@@ -300,8 +306,10 @@ class I18n {
                 lightModeEnabled: 'Switched to light mode',
                 contentCleared: 'Content cleared',
                 editorContentCleared: 'Editor content cleared',
-                saveSuccess: 'Save successful',
+                saveSuccess: 'Save Successful',
                 resumeSavedLocally: 'Resume content saved locally',
+                scrollSyncEnabled: 'Scroll sync enabled',
+                scrollSyncDisabled: 'Scroll sync disabled',
                 
                 // Template names
                 classicTemplateName: 'Classic',

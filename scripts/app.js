@@ -19,6 +19,9 @@ class ResumeApp {
         this.lineHeight = 1.6;
         this.pageMargin = 'normal';
         
+        // 滚动同步设置
+        this.isScrollSyncEnabled = true;
+        
         this.init();
     }
 
@@ -46,6 +49,7 @@ class ResumeApp {
         // 编辑器元素
         this.markdownInput = document.getElementById('markdownInput');
         this.previewContent = document.getElementById('previewContent');
+        this.previewContainer = document.querySelector('.preview-container');
         
         // 标签页元素
         this.tabButtons = document.querySelectorAll('.tab-btn');
@@ -76,6 +80,7 @@ class ResumeApp {
         this.fontSizeRange = document.getElementById('fontSizeRange');
         this.lineHeightRange = document.getElementById('lineHeightRange');
         this.marginSelect = document.getElementById('marginSelect');
+        this.scrollSyncToggle = document.getElementById('scrollSyncToggle');
         
         // 模态框元素
         this.importModal = document.getElementById('importModal');
@@ -149,6 +154,11 @@ class ResumeApp {
             this.updateMargin(e.target.value);
         });
 
+        // 滚动同步开关
+        this.scrollSyncToggle.addEventListener('change', (e) => {
+            this.toggleScrollSync(e.target.checked);
+        });
+
         // 文件导入
         this.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         
@@ -175,6 +185,99 @@ class ResumeApp {
         window.addEventListener('beforeunload', () => {
             this.saveToLocalStorage();
         });
+
+        // 滚动同步功能
+        this.setupScrollSync();
+    }
+
+    /**
+     * 设置滚动同步功能
+     */
+    setupScrollSync() {
+        // 防抖标志，避免循环触发
+        this.isScrollSyncing = false;
+        
+        // 创建防抖函数
+        const debouncedSyncToPreview = this.debounce(() => {
+            if (this.isScrollSyncing || !this.isScrollSyncEnabled) return;
+            this.syncScrollToPreview();
+        }, 16); // 约60fps的更新频率
+        
+        const debouncedSyncToEditor = this.debounce(() => {
+            if (this.isScrollSyncing || !this.isScrollSyncEnabled) return;
+            this.syncScrollToEditor();
+        }, 16);
+        
+        // 监听编辑器滚动事件
+        this.markdownInput.addEventListener('scroll', debouncedSyncToPreview);
+        
+        // 监听预览面板滚动事件（双向同步）
+        this.previewContainer.addEventListener('scroll', debouncedSyncToEditor);
+        
+        // 存储事件处理器引用，以便后续清理
+        this.scrollSyncHandlers = {
+            editorScroll: debouncedSyncToPreview,
+            previewScroll: debouncedSyncToEditor
+        };
+    }
+
+    /**
+     * 将编辑器滚动位置同步到预览面板
+     */
+    syncScrollToPreview() {
+        if (!this.markdownInput || !this.previewContainer) return;
+        
+        this.isScrollSyncing = true;
+        
+        // 计算编辑器滚动百分比
+        const editorScrollTop = this.markdownInput.scrollTop;
+        const editorScrollHeight = this.markdownInput.scrollHeight - this.markdownInput.clientHeight;
+        const scrollPercentage = editorScrollHeight > 0 ? editorScrollTop / editorScrollHeight : 0;
+        
+        // 应用到预览面板
+        const previewScrollHeight = this.previewContainer.scrollHeight - this.previewContainer.clientHeight;
+        const targetScrollTop = scrollPercentage * previewScrollHeight;
+        
+        // 使用requestAnimationFrame确保平滑滚动
+        requestAnimationFrame(() => {
+            this.previewContainer.scrollTop = targetScrollTop;
+            this.isScrollSyncing = false;
+        });
+    }
+
+    /**
+     * 将预览面板滚动位置同步到编辑器（可选功能）
+     */
+    syncScrollToEditor() {
+        if (!this.markdownInput || !this.previewContainer) return;
+        
+        this.isScrollSyncing = true;
+        
+        // 计算预览面板滚动百分比
+        const previewScrollTop = this.previewContainer.scrollTop;
+        const previewScrollHeight = this.previewContainer.scrollHeight - this.previewContainer.clientHeight;
+        const scrollPercentage = previewScrollHeight > 0 ? previewScrollTop / previewScrollHeight : 0;
+        
+        // 应用到编辑器
+        const editorScrollHeight = this.markdownInput.scrollHeight - this.markdownInput.clientHeight;
+        const targetScrollTop = scrollPercentage * editorScrollHeight;
+        
+        // 使用requestAnimationFrame确保平滑滚动
+        requestAnimationFrame(() => {
+            this.markdownInput.scrollTop = targetScrollTop;
+            this.isScrollSyncing = false;
+        });
+    }
+
+    /**
+     * 清理滚动同步事件监听器
+     */
+    cleanupScrollSync() {
+        if (this.scrollSyncHandlers) {
+            this.markdownInput.removeEventListener('scroll', this.scrollSyncHandlers.editorScroll);
+            this.previewContainer.removeEventListener('scroll', this.scrollSyncHandlers.previewScroll);
+            this.scrollSyncHandlers = null;
+        }
     }
 
     /**
@@ -359,6 +462,9 @@ class ResumeApp {
         // 设置页面边距
         this.updateMargin(this.pageMargin);
         this.marginSelect.value = this.pageMargin;
+        
+        // 设置滚动同步开关
+        this.scrollSyncToggle.checked = this.isScrollSyncEnabled;
     }
 
     /**
@@ -505,6 +611,7 @@ class ResumeApp {
             fontSize: this.fontSize,
             lineHeight: this.lineHeight,
             pageMargin: this.pageMargin,
+            isScrollSyncEnabled: this.isScrollSyncEnabled,
             timestamp: Date.now()
         };
         
@@ -534,6 +641,7 @@ class ResumeApp {
                 this.fontSize = data.fontSize || 16;
                 this.lineHeight = data.lineHeight || 1.6;
                 this.pageMargin = data.pageMargin || 'normal';
+                this.isScrollSyncEnabled = data.isScrollSyncEnabled || true;
                 
                 // 应用设置
                 this.selectTemplate(this.currentTemplate);
@@ -717,6 +825,23 @@ class ResumeApp {
                     break;
             }
         }
+    }
+
+    /**
+     * 切换滚动同步功能
+     */
+    toggleScrollSync(enabled) {
+        this.isScrollSyncEnabled = enabled;
+        this.saveToLocalStorage();
+        
+        // 显示提示信息
+        const message = enabled 
+            ? (window.i18n ? window.i18n.t('scrollSyncEnabled') : '滚动同步已开启')
+            : (window.i18n ? window.i18n.t('scrollSyncDisabled') : '滚动同步已关闭');
+        
+        this.showToast('info', 
+            window.i18n ? window.i18n.t('scrollSync') : '滚动同步', 
+            message);
     }
 }
 
