@@ -394,6 +394,11 @@ class I18n {
             return 'en-US';
         }
         
+        // 检查referrer是否来自中文版页面
+        if (document.referrer.includes('index.html')) {
+            return 'zh-CN';
+        }
+        
         return null;
     }
     
