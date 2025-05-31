@@ -34,6 +34,7 @@ class ResumeApp {
         this.loadFromLocalStorage();
         this.initializeFontSettings();
         this.updatePreview();
+        this.updateBackToHomeLink();
         this.showWelcomeToast();
         
         // 监听语言切换事件
@@ -67,6 +68,7 @@ class ResumeApp {
         this.toggleThemeBtn = document.getElementById('toggleTheme');
         this.toggleLayoutBtn = document.getElementById('toggleLayout');
         this.loadTemplateBtn = document.getElementById('loadTemplateBtn');
+        this.backToHomeBtn = document.getElementById('backToHomeBtn');
         
         // 预览控制元素
         this.zoomInBtn = document.getElementById('zoomInBtn');
@@ -765,6 +767,9 @@ class ResumeApp {
         // 更新选项文本
         this.updateSelectOptions();
         
+        // 更新Back to Home按钮链接
+        this.updateBackToHomeLink();
+        
         // 显示语言切换成功消息
         if (language) {
             const message = window.i18n.t('languageChanged') || '语言已切换';
@@ -842,6 +847,20 @@ class ResumeApp {
         this.showToast('info', 
             window.i18n ? window.i18n.t('scrollSync') : '滚动同步', 
             message);
+    }
+
+    /**
+     * 更新Back to Home按钮链接
+     */
+    updateBackToHomeLink() {
+        if (this.backToHomeBtn && window.i18n) {
+            const currentLanguage = window.i18n.getCurrentLanguage();
+            if (currentLanguage === 'en-US') {
+                this.backToHomeBtn.href = 'landing-en.html';
+            } else {
+                this.backToHomeBtn.href = 'index.html';
+            }
+        }
     }
 }
 

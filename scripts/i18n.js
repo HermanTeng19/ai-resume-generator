@@ -5,7 +5,7 @@
 
 class I18n {
     constructor() {
-        this.currentLanguage = this.getStoredLanguage() || this.detectLanguage();
+        this.currentLanguage = this.getStoredLanguage() || this.detectLanguageFromUrl() || this.detectLanguage();
         this.translations = {
             'zh-CN': {
                 // 页面标题和基本信息
@@ -375,6 +375,26 @@ class I18n {
         this.createLanguageSelector();
         this.updatePageLanguage();
         this.bindEvents();
+    }
+    
+    /**
+     * 从URL参数检测语言
+     */
+    detectLanguageFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const langParam = urlParams.get('lang');
+        if (langParam === 'en' || langParam === 'en-US') {
+            return 'en-US';
+        } else if (langParam === 'zh' || langParam === 'zh-CN') {
+            return 'zh-CN';
+        }
+        
+        // 检查referrer是否来自英文版页面
+        if (document.referrer.includes('landing-en.html')) {
+            return 'en-US';
+        }
+        
+        return null;
     }
     
     /**
