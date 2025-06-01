@@ -78,16 +78,6 @@ class ResumeApp {
         
         // 移动预览元素
         this.mobilePreviewContent = document.getElementById('mobilePreviewContent');
-        this.mobileZoomInBtn = document.getElementById('mobileZoomInBtn');
-        this.mobileZoomOutBtn = document.getElementById('mobileZoomOutBtn');
-        this.mobileZoomLevel = document.querySelector('.mobile-zoom-level');
-        
-        // 调试信息
-        console.log('Mobile preview elements initialized:');
-        console.log('- mobilePreviewContent:', !!this.mobilePreviewContent);
-        console.log('- mobileZoomInBtn:', !!this.mobileZoomInBtn);
-        console.log('- mobileZoomOutBtn:', !!this.mobileZoomOutBtn);
-        console.log('- mobileZoomLevel:', !!this.mobileZoomLevel);
         
         // 设置元素
         this.templateCards = document.querySelectorAll('.template-card');
@@ -142,14 +132,6 @@ class ResumeApp {
         this.zoomOutBtn.addEventListener('click', () => this.zoomOut());
         this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
         
-        // 移动预览控制
-        if (this.mobileZoomInBtn) {
-            this.mobileZoomInBtn.addEventListener('click', () => this.mobileZoomIn());
-        }
-        if (this.mobileZoomOutBtn) {
-            this.mobileZoomOutBtn.addEventListener('click', () => this.mobileZoomOut());
-        }
-
         // 模板选择
         this.templateCards.forEach(card => {
             card.addEventListener('click', (e) => {
@@ -312,8 +294,6 @@ class ResumeApp {
             return;
         }
 
-        console.log('Switching to tab:', tabName);
-
         // 更新标签按钮状态
         this.tabButtons.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.tab === tabName);
@@ -327,28 +307,7 @@ class ResumeApp {
         
         // 如果切换到预览标签，确保预览内容是最新的
         if (tabName === 'preview') {
-            console.log('Switching to preview tab, updating content...');
-            console.log('Mobile preview element:', this.mobilePreviewContent);
             this.updatePreview();
-            
-            // 强制更新移动预览内容
-            setTimeout(() => {
-                if (this.mobilePreviewContent && this.markdownInput.value) {
-                    const markdownText = this.markdownInput.value;
-                    const htmlContent = marked.parse(markdownText);
-                    const templateClass = `resume-template-${this.currentTemplate}`;
-                    const themeClass = `theme-${this.currentTheme}`;
-                    
-                    const processedHTML = `
-                        <div class="resume-content ${templateClass} ${themeClass}">
-                            ${this.processHTML(htmlContent)}
-                        </div>
-                    `;
-                    
-                    this.mobilePreviewContent.innerHTML = processedHTML;
-                    console.log('Mobile preview content updated:', processedHTML.substring(0, 100) + '...');
-                }
-            }, 100);
         }
     }
 
@@ -358,8 +317,6 @@ class ResumeApp {
     updatePreview() {
         const markdownText = this.markdownInput.value;
         const htmlContent = marked.parse(markdownText);
-        
-        console.log('Updating preview with markdown length:', markdownText.length);
         
         // 应用模板和主题
         const templateClass = `resume-template-${this.currentTemplate}`;
@@ -373,15 +330,10 @@ class ResumeApp {
         
         // 更新桌面预览
         this.previewContent.innerHTML = processedHTML;
-        console.log('Desktop preview updated');
         
         // 更新移动预览
         if (this.mobilePreviewContent) {
             this.mobilePreviewContent.innerHTML = processedHTML;
-            console.log('Mobile preview updated, element exists:', !!this.mobilePreviewContent);
-            console.log('Mobile preview content length:', this.mobilePreviewContent.innerHTML.length);
-        } else {
-            console.warn('Mobile preview element not found!');
         }
 
         // 应用缩放
@@ -555,29 +507,9 @@ class ResumeApp {
         this.previewContent.style.transform = `scale(${scale})`;
         this.zoomLevel.textContent = `${this.currentZoom}%`;
         
-        // 同时应用到移动预览
+        // 移动预览始终保持100%缩放，不应用桌面缩放
         if (this.mobilePreviewContent) {
-            this.mobilePreviewContent.style.transform = `scale(${scale})`;
-        }
-        if (this.mobileZoomLevel) {
-            this.mobileZoomLevel.textContent = `${this.currentZoom}%`;
-        }
-    }
-
-    /**
-     * 移动预览缩放功能
-     */
-    mobileZoomIn() {
-        if (this.currentZoom < 200) {
-            this.currentZoom += 10;
-            this.applyZoom();
-        }
-    }
-
-    mobileZoomOut() {
-        if (this.currentZoom > 50) {
-            this.currentZoom -= 10;
-            this.applyZoom();
+            this.mobilePreviewContent.style.transform = 'scale(1)';
         }
     }
 
