@@ -5,7 +5,29 @@
 
 class I18n {
     constructor() {
-        this.currentLanguage = this.getStoredLanguage() || this.detectLanguageFromUrl() || this.detectLanguage();
+        // 优先检查URL参数，然后是存储的语言，最后是浏览器语言
+        const urlLanguage = this.detectLanguageFromUrl();
+        const storedLanguage = this.getStoredLanguage();
+        const browserLanguage = this.detectLanguage();
+        
+        // 调试信息
+        console.log('I18n Language Detection:', {
+            url: window.location.href,
+            urlLanguage,
+            storedLanguage,
+            browserLanguage
+        });
+        
+        // 如果URL中有语言参数，优先使用并保存
+        if (urlLanguage) {
+            this.currentLanguage = urlLanguage;
+            this.setStoredLanguage(urlLanguage);
+            console.log('Using URL language:', urlLanguage);
+        } else {
+            this.currentLanguage = storedLanguage || browserLanguage;
+            console.log('Using stored/browser language:', this.currentLanguage);
+        }
+        
         this.translations = {
             'zh-CN': {
                 // 页面标题和基本信息
@@ -697,4 +719,9 @@ ${this.t('sampleSummary')}
 }
 
 // 创建全局实例
-window.i18n = new I18n(); 
+window.i18n = new I18n();
+
+// 当DOM加载完成后初始化i18n
+document.addEventListener('DOMContentLoaded', () => {
+    window.i18n.init();
+}); 

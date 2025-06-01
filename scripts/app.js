@@ -665,13 +665,27 @@ class ResumeApp {
                 console.error('加载本地存储失败:', error);
             }
         } else {
-            // 如果没有保存的数据，加载示例内容
-            if (window.i18n && typeof window.i18n.getSampleContent === 'function') {
-                this.markdownInput.value = window.i18n.getSampleContent();
-            }
+            // 如果没有保存的数据，延迟加载示例内容，确保i18n已初始化
+            this.loadSampleContentWhenReady();
             // 初始化撤销栈
             this.saveToUndoStack();
         }
+    }
+
+    /**
+     * 当i18n准备好时加载示例内容
+     */
+    loadSampleContentWhenReady() {
+        const loadSample = () => {
+            if (window.i18n && typeof window.i18n.getSampleContent === 'function') {
+                this.markdownInput.value = window.i18n.getSampleContent();
+                this.updatePreview();
+            } else {
+                // 如果i18n还没准备好，继续等待
+                setTimeout(loadSample, 50);
+            }
+        };
+        loadSample();
     }
 
     /**
@@ -866,5 +880,21 @@ class ResumeApp {
 
 // 初始化应用
 document.addEventListener('DOMContentLoaded', () => {
-    window.resumeApp = new ResumeApp();
+    // 确保i18n先初始化
+    if (window.i18n) {
+        // 如果i18n已经存在，等待一个微任务后再初始化应用
+        setTimeout(() => {
+            window.resumeApp = new ResumeApp();
+        }, 0);
+    } else {
+        // 如果i18n还没有初始化，监听i18n初始化完成事件
+        const checkI18n = () => {
+            if (window.i18n) {
+                window.resumeApp = new ResumeApp();
+            } else {
+                setTimeout(checkI18n, 10);
+            }
+        };
+        checkI18n();
+    }
 }); 
