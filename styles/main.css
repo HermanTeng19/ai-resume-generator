@@ -444,6 +444,7 @@ body {
   flex: 1;
   overflow-y: auto;
   padding: var(--space-4);
+  height: 100%; /* 确保占满可用高度 */
 }
 
 .mobile-preview-content {
@@ -452,13 +453,14 @@ body {
   background: white;
   box-shadow: var(--shadow-lg);
   border-radius: var(--radius-lg);
-  min-height: 200px;
+  min-height: calc(100vh - 200px); /* 动态计算最小高度 */
   transform-origin: top center;
   transition: transform var(--transition-normal);
   padding: var(--space-4);
   overflow: visible;
   position: relative;
   transform: scale(1) !important;
+  width: 100%;
 }
 
 /* 确保移动预览中的简历内容正确显示 */
@@ -471,9 +473,23 @@ body {
   max-width: 100%;
   min-height: auto;
   position: relative;
+  width: 100%;
 }
 
 /* ===== 响应式设计 ===== */
+/* iPad和平板设备优化 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .mobile-preview-content {
+    min-height: calc(100vh - 180px);
+    max-width: 90%;
+  }
+  
+  .mobile-preview-content .resume-content {
+    padding: var(--space-8);
+    font-size: 0.95rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .main-content {
     grid-template-areas: 
@@ -513,6 +529,25 @@ body {
   
   .mobile-preview-btn {
     display: flex;
+  }
+  
+  /* 移动预览优化 */
+  .mobile-preview-content-wrapper {
+    padding: var(--space-2);
+    height: calc(100vh - 160px); /* 为header和tabs留出空间 */
+  }
+  
+  .mobile-preview-content {
+    min-height: calc(100vh - 200px);
+    max-width: 100%;
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+  }
+  
+  .mobile-preview-content .resume-content {
+    padding: var(--space-4);
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
   
   .toolbar {
