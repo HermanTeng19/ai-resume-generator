@@ -412,12 +412,12 @@ class I18n {
         }
         
         // 检查referrer是否来自英文版页面
-        if (document.referrer.includes('landing-en.html')) {
+        if (document.referrer.includes('index.html')) {
             return 'en-US';
         }
         
         // 检查referrer是否来自中文版页面
-        if (document.referrer.includes('index.html')) {
+        if (document.referrer.includes('landing-zh.html')) {
             return 'zh-CN';
         }
         

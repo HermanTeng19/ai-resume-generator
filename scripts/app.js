@@ -870,9 +870,9 @@ class ResumeApp {
         if (this.backToHomeBtn && window.i18n) {
             const currentLanguage = window.i18n.getCurrentLanguage();
             if (currentLanguage === 'en-US') {
-                this.backToHomeBtn.href = 'landing-en.html';
-            } else {
                 this.backToHomeBtn.href = 'index.html';
+            } else {
+                this.backToHomeBtn.href = 'landing-zh.html';
             }
         }
     }
