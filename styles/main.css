@@ -452,11 +452,12 @@ body {
   background: white;
   box-shadow: var(--shadow-lg);
   border-radius: var(--radius-lg);
-  min-height: 80vh;
+  min-height: 200px;
   transform-origin: top center;
   transition: transform var(--transition-normal);
   padding: var(--space-4);
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
 }
 
 /* 确保移动预览中的简历内容正确显示 */
@@ -467,6 +468,17 @@ body {
   box-shadow: none;
   margin: 0;
   max-width: 100%;
+  min-height: auto;
+  position: relative;
+}
+
+/* 调试样式 - 临时添加边框来查看元素 */
+.mobile-preview-content {
+  border: 2px solid red !important;
+}
+
+.mobile-preview-content .resume-content {
+  border: 2px solid blue !important;
 }
 
 .mobile-zoom-level {
