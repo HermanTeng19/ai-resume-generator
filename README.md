@@ -54,15 +54,15 @@
 ## 🚀 快速开始
 
 ### 🌐 在线使用（推荐）
-- **首页**: [https://resumegenerator.aibytes.dpdns.org](https://resumegenerator.aibytes.dpdns.org)
+- **英文首页**: [https://resumegenerator.aibytes.dpdns.org](https://resumegenerator.aibytes.dpdns.org)
+- **中文首页**: [https://resumegenerator.aibytes.dpdns.org/landing-zh.html](https://resumegenerator.aibytes.dpdns.org/landing-zh.html)
 - **简历编辑器**: [https://resumegenerator.aibytes.dpdns.org/app](https://resumegenerator.aibytes.dpdns.org/app)
-- **英文版首页**: [https://resumegenerator.aibytes.dpdns.org/landing-en.html](https://resumegenerator.aibytes.dpdns.org/landing-en.html)
 
 ### 💻 本地使用
 
 #### 方法一：从欢迎页面开始
 1. 下载项目文件到本地
-2. 双击打开 `index.html` 文件查看产品介绍
+2. 双击打开 `index.html` 文件查看英文版产品介绍，或打开 `landing-zh.html` 查看中文版
 3. 点击"开始制作"按钮进入编辑器（`app.html`）
 4. 开始编辑您的简历！
 
@@ -171,9 +171,9 @@ npm run preview
 ### 项目结构
 ```
 ai-resume-generator/
-├── index.html              # 产品首页（Landing Page）
+├── index.html              # 英文版首页（Landing Page）
+├── landing-zh.html         # 中文版首页
 ├── app.html               # 简历编辑器应用
-├── landing-en.html        # 英文版首页
 ├── package.json           # Node.js配置文件
 ├── vercel.json            # Vercel部署配置
 ├── site.webmanifest       # PWA清单文件
@@ -200,10 +200,10 @@ ai-resume-generator/
 ### 网站路由结构
 ```
 https://resumegenerator.aibytes.dpdns.org/
-├── /                    # 中文首页 (index.html)
+├── /                    # 英文首页 (index.html)
+├── /landing-zh.html     # 中文首页
 ├── /app                 # 简历编辑器 (app.html)
-├── /editor              # 编辑器别名 (app.html)
-└── /landing-en.html     # 英文首页
+└── /editor              # 编辑器别名 (app.html)
 ```
 
 ### 设计原则
@@ -247,7 +247,8 @@ https://resumegenerator.aibytes.dpdns.org/
    - 已添加安全头和缓存策略
 
 3. **路由配置**
-   - 根路径 `/` 指向 Landing Page
+   - 根路径 `/` 指向英文版 Landing Page
+   - `/landing-zh.html` 指向中文版首页
    - `/app` 路径指向简历编辑器
    - 支持无扩展名的清洁URL
 

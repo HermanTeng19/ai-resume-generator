@@ -54,15 +54,15 @@ A lightweight Markdown resume conversion tool that supports real-time preview, s
 ## 🚀 Quick Start
 
 ### 🌐 Online Use (Recommended)
-- **Homepage**: [https://resumegenerator.aibytes.dpdns.org](https://resumegenerator.aibytes.dpdns.org)
+- **English Homepage**: [https://resumegenerator.aibytes.dpdns.org](https://resumegenerator.aibytes.dpdns.org)
+- **Chinese Homepage**: [https://resumegenerator.aibytes.dpdns.org/landing-zh.html](https://resumegenerator.aibytes.dpdns.org/landing-zh.html)
 - **Resume Editor**: [https://resumegenerator.aibytes.dpdns.org/app](https://resumegenerator.aibytes.dpdns.org/app)
-- **English Homepage**: [https://resumegenerator.aibytes.dpdns.org/landing-en.html](https://resumegenerator.aibytes.dpdns.org/landing-en.html)
 
 ### 💻 Local Use
 
 #### Method 1: Start from Welcome Page
 1. Download project files to local machine
-2. Double-click to open `index.html` file to view product introduction
+2. Double-click to open `index.html` file to view English product introduction, or open `landing-zh.html` for Chinese version
 3. Click "Get Started" button to enter editor (`app.html`)
 4. Start editing your resume!
 
@@ -171,9 +171,9 @@ The system automatically recognizes the following formats and adds corresponding
 ### Project Structure
 ```
 ai-resume-generator/
-├── index.html              # Product Homepage (Landing Page)
+├── index.html              # English Homepage (Landing Page)
+├── landing-zh.html         # Chinese Homepage
 ├── app.html               # Resume Editor Application
-├── landing-en.html        # English Homepage
 ├── package.json           # Node.js configuration
 ├── vercel.json            # Vercel deployment config
 ├── site.webmanifest       # PWA manifest file
@@ -200,10 +200,10 @@ ai-resume-generator/
 ### Website Routing Structure
 ```
 https://resumegenerator.aibytes.dpdns.org/
-├── /                    # Chinese Homepage (index.html)
+├── /                    # English Homepage (index.html)
+├── /landing-zh.html     # Chinese Homepage
 ├── /app                 # Resume Editor (app.html)
-├── /editor              # Editor Alias (app.html)
-└── /landing-en.html     # English Homepage
+└── /editor              # Editor Alias (app.html)
 ```
 
 ### Design Principles
@@ -247,7 +247,8 @@ The project is fully configured for Vercel deployment:
    - Added security headers and caching strategies
 
 3. **Routing Configuration**
-   - Root path `/` points to Landing Page
+   - Root path `/` points to English Landing Page
+   - `/landing-zh.html` points to Chinese Homepage
    - `/app` path points to Resume Editor
    - Support for clean URLs without extensions
 
