@@ -655,7 +655,7 @@
         }
         
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
             .nav-links {
                 display: none;
             }
@@ -697,6 +697,31 @@
             
             .section-title {
                 font-size: 2rem;
+            }
+        }
+        
+        /* Additional responsive adjustments for tablets */
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-container {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+            
+            .demo-editor, .demo-preview {
+                height: 400px;
+            }
+            
+            .demo-code {
+                font-size: 0.8rem;
+                padding: 1rem;
+            }
+            
+            .demo-resume {
+                padding: 1.5rem;
             }
         }
         
