@@ -406,6 +406,52 @@ body {
   align-items: center;
 }
 
+/* ===== 移动预览标签样式 ===== */
+.mobile-preview-btn {
+  display: none;
+}
+
+.mobile-preview-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-tertiary);
+}
+
+.mobile-preview-header {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-preview-content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+}
+
+.mobile-preview-content {
+  max-width: 100%;
+  margin: 0 auto;
+  background: white;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-lg);
+  min-height: 80vh;
+  transform-origin: top center;
+  transition: transform var(--transition-normal);
+}
+
+.mobile-zoom-level {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  min-width: 3rem;
+  text-align: center;
+}
+
 /* ===== 响应式设计 ===== */
 @media (max-width: 1024px) {
   .main-content {
@@ -444,15 +490,8 @@ body {
     display: none;
   }
   
-  .preview-panel.mobile-active {
+  .mobile-preview-btn {
     display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: var(--z-modal);
-    background: var(--bg-primary);
   }
   
   .toolbar {

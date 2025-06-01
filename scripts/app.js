@@ -76,6 +76,12 @@ class ResumeApp {
         this.fullscreenBtn = document.getElementById('fullscreenBtn');
         this.zoomLevel = document.querySelector('.zoom-level');
         
+        // 移动预览元素
+        this.mobilePreviewContent = document.getElementById('mobilePreviewContent');
+        this.mobileZoomInBtn = document.getElementById('mobileZoomInBtn');
+        this.mobileZoomOutBtn = document.getElementById('mobileZoomOutBtn');
+        this.mobileZoomLevel = document.querySelector('.mobile-zoom-level');
+        
         // 设置元素
         this.templateCards = document.querySelectorAll('.template-card');
         this.colorOptions = document.querySelectorAll('.color-option');
@@ -128,6 +134,14 @@ class ResumeApp {
         this.zoomInBtn.addEventListener('click', () => this.zoomIn());
         this.zoomOutBtn.addEventListener('click', () => this.zoomOut());
         this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+        
+        // 移动预览控制
+        if (this.mobileZoomInBtn) {
+            this.mobileZoomInBtn.addEventListener('click', () => this.mobileZoomIn());
+        }
+        if (this.mobileZoomOutBtn) {
+            this.mobileZoomOutBtn.addEventListener('click', () => this.mobileZoomOut());
+        }
 
         // 模板选择
         this.templateCards.forEach(card => {
@@ -301,6 +315,11 @@ class ResumeApp {
             const expectedId = `${tabName}Tab`;
             content.classList.toggle('active', content.id === expectedId);
         });
+        
+        // 如果切换到预览标签，确保预览内容是最新的
+        if (tabName === 'preview') {
+            this.updatePreview();
+        }
     }
 
     /**
@@ -314,11 +333,19 @@ class ResumeApp {
         const templateClass = `resume-template-${this.currentTemplate}`;
         const themeClass = `theme-${this.currentTheme}`;
         
-        this.previewContent.innerHTML = `
+        const processedHTML = `
             <div class="resume-content ${templateClass} ${themeClass}">
                 ${this.processHTML(htmlContent)}
             </div>
         `;
+        
+        // 更新桌面预览
+        this.previewContent.innerHTML = processedHTML;
+        
+        // 更新移动预览
+        if (this.mobilePreviewContent) {
+            this.mobilePreviewContent.innerHTML = processedHTML;
+        }
 
         // 应用缩放
         this.applyZoom();
@@ -490,6 +517,31 @@ class ResumeApp {
         const scale = this.currentZoom / 100;
         this.previewContent.style.transform = `scale(${scale})`;
         this.zoomLevel.textContent = `${this.currentZoom}%`;
+        
+        // 同时应用到移动预览
+        if (this.mobilePreviewContent) {
+            this.mobilePreviewContent.style.transform = `scale(${scale})`;
+        }
+        if (this.mobileZoomLevel) {
+            this.mobileZoomLevel.textContent = `${this.currentZoom}%`;
+        }
+    }
+
+    /**
+     * 移动预览缩放功能
+     */
+    mobileZoomIn() {
+        if (this.currentZoom < 200) {
+            this.currentZoom += 10;
+            this.applyZoom();
+        }
+    }
+
+    mobileZoomOut() {
+        if (this.currentZoom > 50) {
+            this.currentZoom -= 10;
+            this.applyZoom();
+        }
     }
 
     /**
