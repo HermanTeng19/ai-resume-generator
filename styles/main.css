@@ -141,6 +141,18 @@
   color: var(--primary-300);
 }
 
+/* 暗色主题下的移动预览样式 */
+[data-theme="dark"] .mobile-preview-content {
+  background: var(--gray-800);
+  color: var(--gray-100);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .mobile-preview-content .resume-content {
+  background: var(--gray-800);
+  color: var(--gray-100);
+}
+
 /* ===== 基础重置 ===== */
 *,
 *::before,
@@ -443,6 +455,18 @@ body {
   min-height: 80vh;
   transform-origin: top center;
   transition: transform var(--transition-normal);
+  padding: var(--space-4);
+  overflow: hidden;
+}
+
+/* 确保移动预览中的简历内容正确显示 */
+.mobile-preview-content .resume-content {
+  padding: var(--space-6);
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  margin: 0;
+  max-width: 100%;
 }
 
 .mobile-zoom-level {
