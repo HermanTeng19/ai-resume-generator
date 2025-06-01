@@ -82,6 +82,13 @@ class ResumeApp {
         this.mobileZoomOutBtn = document.getElementById('mobileZoomOutBtn');
         this.mobileZoomLevel = document.querySelector('.mobile-zoom-level');
         
+        // 调试信息
+        console.log('Mobile preview elements initialized:');
+        console.log('- mobilePreviewContent:', !!this.mobilePreviewContent);
+        console.log('- mobileZoomInBtn:', !!this.mobileZoomInBtn);
+        console.log('- mobileZoomOutBtn:', !!this.mobileZoomOutBtn);
+        console.log('- mobileZoomLevel:', !!this.mobileZoomLevel);
+        
         // 设置元素
         this.templateCards = document.querySelectorAll('.template-card');
         this.colorOptions = document.querySelectorAll('.color-option');
@@ -305,6 +312,8 @@ class ResumeApp {
             return;
         }
 
+        console.log('Switching to tab:', tabName);
+
         // 更新标签按钮状态
         this.tabButtons.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.tab === tabName);
@@ -318,7 +327,28 @@ class ResumeApp {
         
         // 如果切换到预览标签，确保预览内容是最新的
         if (tabName === 'preview') {
+            console.log('Switching to preview tab, updating content...');
+            console.log('Mobile preview element:', this.mobilePreviewContent);
             this.updatePreview();
+            
+            // 强制更新移动预览内容
+            setTimeout(() => {
+                if (this.mobilePreviewContent && this.markdownInput.value) {
+                    const markdownText = this.markdownInput.value;
+                    const htmlContent = marked.parse(markdownText);
+                    const templateClass = `resume-template-${this.currentTemplate}`;
+                    const themeClass = `theme-${this.currentTheme}`;
+                    
+                    const processedHTML = `
+                        <div class="resume-content ${templateClass} ${themeClass}">
+                            ${this.processHTML(htmlContent)}
+                        </div>
+                    `;
+                    
+                    this.mobilePreviewContent.innerHTML = processedHTML;
+                    console.log('Mobile preview content updated:', processedHTML.substring(0, 100) + '...');
+                }
+            }, 100);
         }
     }
 
@@ -328,6 +358,8 @@ class ResumeApp {
     updatePreview() {
         const markdownText = this.markdownInput.value;
         const htmlContent = marked.parse(markdownText);
+        
+        console.log('Updating preview with markdown length:', markdownText.length);
         
         // 应用模板和主题
         const templateClass = `resume-template-${this.currentTemplate}`;
@@ -341,10 +373,15 @@ class ResumeApp {
         
         // 更新桌面预览
         this.previewContent.innerHTML = processedHTML;
+        console.log('Desktop preview updated');
         
         // 更新移动预览
         if (this.mobilePreviewContent) {
             this.mobilePreviewContent.innerHTML = processedHTML;
+            console.log('Mobile preview updated, element exists:', !!this.mobilePreviewContent);
+            console.log('Mobile preview content length:', this.mobilePreviewContent.innerHTML.length);
+        } else {
+            console.warn('Mobile preview element not found!');
         }
 
         // 应用缩放
