@@ -141,17 +141,7 @@
   color: var(--primary-300);
 }
 
-/* 暗色主题下的移动预览样式 */
-[data-theme="dark"] .mobile-preview-content {
-  background: var(--gray-800);
-  color: var(--gray-100);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-}
 
-[data-theme="dark"] .mobile-preview-content .resume-content {
-  background: var(--gray-800);
-  color: var(--gray-100);
-}
 
 /* ===== 基础重置 ===== */
 *,
@@ -402,89 +392,33 @@ body {
 
 /* ===== Toolbar ===== */
 .toolbar {
-  grid-area: toolbar;
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border-color);
-  padding: var(--space-3) var(--space-6);
+  position: fixed;
+  right: var(--space-6);
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  gap: var(--space-3);
+  z-index: var(--z-toolbar);
 }
 
 .toolbar-section {
   display: flex;
-  gap: var(--space-2);
-  align-items: center;
-}
-
-/* ===== 移动预览标签样式 ===== */
-.mobile-preview-btn {
-  display: none;
-}
-
-.mobile-preview-container {
-  flex: 1;
-  display: flex;
   flex-direction: column;
-  overflow: hidden;
-  background: var(--bg-tertiary);
+  gap: var(--space-2);
 }
 
-.mobile-preview-header {
-  padding: var(--space-4);
-  border-bottom: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.mobile-preview-content-wrapper {
-  flex: 1;
-  overflow-y: auto;
-  padding: var(--space-4);
-  height: 100%; /* 确保占满可用高度 */
-}
-
-.mobile-preview-content {
-  max-width: 100%;
-  margin: 0 auto;
-  background: white;
-  box-shadow: var(--shadow-lg);
-  border-radius: var(--radius-lg);
-  min-height: calc(100vh - 200px); /* 动态计算最小高度 */
-  transform-origin: top center;
-  transition: transform var(--transition-normal);
-  padding: var(--space-4);
-  overflow: visible;
-  position: relative;
-  transform: scale(1) !important;
-  width: 100%;
-}
-
-/* 确保移动预览中的简历内容正确显示 */
-.mobile-preview-content .resume-content {
-  padding: var(--space-6);
-  background: white;
-  border-radius: var(--radius-md);
-  box-shadow: none;
-  margin: 0;
-  max-width: 100%;
-  min-height: auto;
-  position: relative;
-  width: 100%;
-}
 
 /* ===== 响应式设计 ===== */
 /* iPad和平板设备优化 */
 @media (max-width: 1024px) and (min-width: 769px) {
-  .mobile-preview-content {
+  .preview-content {
     min-height: calc(100vh - 180px);
     max-width: 90%;
   }
   
-  .mobile-preview-content .resume-content {
+  .preview-content .resume-content {
     padding: var(--space-8);
     font-size: 0.95rem;
   }
@@ -527,34 +461,18 @@ body {
     display: none;
   }
   
-  .mobile-preview-btn {
-    display: flex;
-  }
-  
-  /* 移动预览优化 */
-  .mobile-preview-content-wrapper {
-    padding: var(--space-2);
-    height: calc(100vh - 160px); /* 为header和tabs留出空间 */
-  }
-  
-  .mobile-preview-content {
-    min-height: calc(100vh - 200px);
-    max-width: 100%;
-    padding: var(--space-3);
-    border-radius: var(--radius-md);
-  }
-  
-  .mobile-preview-content .resume-content {
-    padding: var(--space-4);
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-  
   .toolbar {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: space-between;
     padding: var(--space-2) var(--space-4);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
   }
   
   .toolbar-section {
+    flex-direction: row;
     gap: var(--space-1);
   }
 }

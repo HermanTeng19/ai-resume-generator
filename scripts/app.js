@@ -76,9 +76,6 @@ class ResumeApp {
         this.fullscreenBtn = document.getElementById('fullscreenBtn');
         this.zoomLevel = document.querySelector('.zoom-level');
         
-        // 移动预览元素
-        this.mobilePreviewContent = document.getElementById('mobilePreviewContent');
-        
         // 设置元素
         this.templateCards = document.querySelectorAll('.template-card');
         this.colorOptions = document.querySelectorAll('.color-option');
@@ -331,11 +328,6 @@ class ResumeApp {
         // 更新桌面预览
         this.previewContent.innerHTML = processedHTML;
         
-        // 更新移动预览
-        if (this.mobilePreviewContent) {
-            this.mobilePreviewContent.innerHTML = processedHTML;
-        }
-
         // 应用缩放
         this.applyZoom();
         
@@ -506,11 +498,6 @@ class ResumeApp {
         const scale = this.currentZoom / 100;
         this.previewContent.style.transform = `scale(${scale})`;
         this.zoomLevel.textContent = `${this.currentZoom}%`;
-        
-        // 移动预览始终保持100%缩放，不应用桌面缩放
-        if (this.mobilePreviewContent) {
-            this.mobilePreviewContent.style.transform = 'scale(1)';
-        }
     }
 
     /**
