@@ -5,6 +5,9 @@
 
 class I18n {
     constructor() {
+        // 初始化事件绑定标志
+        this.eventsAreBound = false;
+        
         // 优先检查URL参数，然后是存储的语言，最后是浏览器语言
         const urlLanguage = this.detectLanguageFromUrl();
         const storedLanguage = this.getStoredLanguage();
@@ -386,8 +389,6 @@ class I18n {
                 languageChanged: 'Language switched to English'
             }
         };
-        
-        this.init();
     }
     
     /**
@@ -453,6 +454,13 @@ class I18n {
         const header = document.querySelector('.header .nav-actions');
         if (!header) return;
         
+        // 检查是否已经存在语言选择器，避免重复创建
+        const existingSelector = header.querySelector('.language-selector');
+        if (existingSelector) {
+            console.log('Language selector already exists, removing old one');
+            existingSelector.remove();
+        }
+        
         const languageSelector = document.createElement('div');
         languageSelector.className = 'language-selector';
         languageSelector.innerHTML = `
@@ -474,13 +482,26 @@ class I18n {
         
         // 插入到主题切换按钮之前
         const themeToggle = header.querySelector('#toggleTheme');
-        header.insertBefore(languageSelector, themeToggle);
+        if (themeToggle) {
+            header.insertBefore(languageSelector, themeToggle);
+        } else {
+            // 如果找不到主题切换按钮，就插入到末尾
+            header.appendChild(languageSelector);
+        }
+        
+        console.log('Language selector created successfully');
     }
     
     /**
      * 绑定事件
      */
     bindEvents() {
+        // 防止重复绑定事件
+        if (this.eventsAreBound) {
+            console.log('Events already bound, skipping');
+            return;
+        }
+        
         // 语言切换按钮点击事件
         document.addEventListener('click', (e) => {
             const languageToggle = e.target.closest('#languageToggle');
@@ -488,16 +509,19 @@ class I18n {
             const dropdown = document.getElementById('languageDropdown');
             
             if (languageToggle) {
-                dropdown.classList.toggle('show');
+                dropdown?.classList.toggle('show');
                 e.stopPropagation();
             } else if (languageOption) {
                 const newLanguage = languageOption.dataset.lang;
                 this.switchLanguage(newLanguage);
-                dropdown.classList.remove('show');
+                dropdown?.classList.remove('show');
             } else {
                 dropdown?.classList.remove('show');
             }
         });
+        
+        this.eventsAreBound = true;
+        console.log('Language selector events bound successfully');
     }
     
     /**
